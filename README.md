@@ -23,12 +23,12 @@ Tianwen4 arrive at 2032这个算例是从LEO6378+700km出发的，只需要你�
 #4
 
 ![image](https://github.com/Quantum-dogdog/GMAT-NASA/blob/main/eej.jpg)
-根据NASA Ames Research Center Trajectory Browser（ https://trajbrowser.arc.nasa.gov/traj_browser.php ）里User Guide页面下最后一段的说法，Trajectory Browser是一个低保真轨道设计工具，GMAT是一个高保真轨道设计工具，这是因为Trajectory Browser只考虑太阳的引力，而GMAT可以考虑所有行星的摄动、光压、球谐重力球......所以你是没有办法完全复现Trajectory Browser里得出的发射日期、deltaV的（事实上我们这个模拟的算例中的发射日期比Trajectory Browser给出的2025.10.20早大约1个月，深空机动比Trajectory Browser给出的0.724m/s大40%），所以不用钻牛角尖，非要一模一样。
+根据NASA Ames Research Center Trajectory Browser（ https://trajbrowser.arc.nasa.gov/traj_browser.php ）里User Guide页面下最后一段的说法，Trajectory Browser是一个低保真轨道设计工具，GMAT是一个高保真轨道设计工具，这是因为Trajectory Browser只考虑太阳的引力，而GMAT可以考虑所有行星的摄动、光压、球谐重力球......所以你是没有办法完全复现Trajectory Browser里得出的发射日期、deltaV的（事实上我们这个模拟的算例中的发射日期比Trajectory Browser给出的2025.10.20早大约1个月，深空机动比Trajectory Browser给出的0.724m/s大40%）。Trajectory Browser里是从250km的LEO出发，deltaV是4.3km/s，我试了很多次，都达不到这个数，但是用GTO作为停泊轨道的话，是可以达到这个数的。
 
 #5
 
-Tianwen4括号里带质量的两个算例的任务时间是和Trajectory Browser的4.77年十分接近的，但是发射日期、飞掠日期、到达日期均和Trajectory Browser有误差；Tianwen4 arrive at 2032的算例的发射时间和飞掠时间同Trajectory Browser一样，但是到达时间比Trajectory Browser的2030年晚2年，所以是无法完全复现Trajectory Browser这个低保真轨道计算工具给出的答案的。
+Tianwen4括号里带质量的两个算例的任务时间是和Trajectory Browser的4.77年十分接近的，但是发射日期、飞掠日期、到达日期均和Trajectory Browser有误差；Tianwen4 arrive at 2032的算例的发射时间和飞掠时间同Trajectory Browser一样，但是到达时间比Trajectory Browser的2030年晚2年，所以是无法完全复现Trajectory Browser这个低保真轨道计算工具给出的答案的，所以不用钻牛角尖，非要一模一样。
 
 #6
 
-后续的提升：算例中的机动都是瞬时完成的，而现实中都是finiteburn，所以大家有兴趣的话可以尝试将算例中的impulsiveburn升级成finiteburn。
+后续的提升：算例中的机动都是瞬时完成的，而现实中都是finiteburn，所以大家有兴趣的话可以尝试将算例中的impulsiveburn升级成finiteburn，那样finiteburn就需要同时考虑推力和Isp了，要达到同样的C3，同样的Isp，不同的推力消耗的燃料不同。
