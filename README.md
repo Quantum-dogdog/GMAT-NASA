@@ -18,7 +18,7 @@
 
 #4
 
-eej.png
+
 根据NASA Ames Research Center Trajectory Browser（ https://trajbrowser.arc.nasa.gov/traj_browser.php ）里User Guide页面下最后一段的说法，Trajectory Browser是一个低保真轨道设计工具，GMAT是一个高保真轨道设计工具，这是因为Trajectory Browser只考虑太阳的引力，而GMAT可以考虑所有行星的摄动、光压、球谐重力球......所以你是没有办法完全复现Trajectory Browser里得出的发射日期、deltaV的（事实上我们这个模拟的算例中的发射日期比Trajectory Browser给出的2025.10.20早大约1个月，深空机动比Trajectory Browser给出的0.724m/s大40%），所以不用钻牛角尖，非要一模一样。
 
 #5
