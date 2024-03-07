@@ -32,3 +32,11 @@ Tianwen4括号里带质量的两个算例的任务时间是和Trajectory Browser
 #6
 
 后续的提升：算例中的机动都是瞬时完成的，而现实中都是finiteburn，所以大家有兴趣的话可以尝试将算例中的impulsiveburn升级成finiteburn，那样finiteburn就需要同时考虑推力和Isp了，要达到同样的C3，同样的Isp，不同的推力消耗的燃料不同。
+
+
+#2024-03-07更新
+
+#7
+
+新增了finiteburn到GEO、finiteburn模拟嫦娥5号任务的脚本（该模拟基本做到了与现实世界同时序，但是抵达月球的轨道参数没能完全与现实一样）。
+
