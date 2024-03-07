@@ -1,0 +1,451 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2024-02-28 12:28:02
+
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft change5;
+GMAT change5.DateFormat = UTCGregorian;
+GMAT change5.Epoch = '23 Nov 2020 20:39:14.000';
+GMAT change5.CoordinateSystem = guess1xyz;
+GMAT change5.DisplayStateType = Cartesian;
+GMAT change5.X = 3.339550858072471e-013;
+GMAT change5.Y = -7.424616477180734e-015;
+GMAT change5.Z = 185.0699999999999;
+GMAT change5.VX = 1.639999999999998;
+GMAT change5.VY = 5.81699999999999;
+GMAT change5.VZ = 1.659999999999991;
+GMAT change5.DryMass = 6200;
+GMAT change5.Cd = 2.2;
+GMAT change5.Cr = 1.8;
+GMAT change5.DragArea = 15;
+GMAT change5.SRPArea = 1;
+GMAT change5.Tanks = {s2LH2, s2LOX, MMH};
+GMAT change5.Thrusters = {YF75DX2, YF37};
+GMAT change5.NAIFId = -10000001;
+GMAT change5.NAIFIdReferenceFrame = -9000001;
+GMAT change5.OrbitColor = Red;
+GMAT change5.TargetColor = Teal;
+GMAT change5.OrbitErrorCovariance = [ 1e+070 0 0 0 0 0 ; 0 1e+070 0 0 0 0 ; 0 0 1e+070 0 0 0 ; 0 0 0 1e+070 0 0 ; 0 0 0 0 1e+070 0 ; 0 0 0 0 0 1e+070 ];
+GMAT change5.CdSigma = 1e+070;
+GMAT change5.CrSigma = 1e+070;
+GMAT change5.Id = 'SatId';
+GMAT change5.Attitude = CoordinateSystemFixed;
+
+GMAT change5.SPADSRPScaleFactor = 1;
+
+
+GMAT change5.ModelFile = 'aura.3ds';
+GMAT change5.ModelOffsetX = 0;
+GMAT change5.ModelOffsetY = 0;
+GMAT change5.ModelOffsetZ = 0;
+GMAT change5.ModelRotationX = 0;
+GMAT change5.ModelRotationY = 0;
+GMAT change5.ModelRotationZ = 0;
+GMAT change5.ModelScale = 1;
+GMAT change5.AttitudeDisplayStateType = 'Quaternion';
+GMAT change5.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT change5.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT change5.EulerAngleSequence = '321';
+
+%----------------------------------------
+%---------- Hardware Components
+%----------------------------------------
+
+Create ChemicalTank s2LOX;
+GMAT s2LOX.AllowNegativeFuelMass = true;
+GMAT s2LOX.FuelMass = 26754;
+GMAT s2LOX.Pressure = 1500;
+GMAT s2LOX.Temperature = -183;
+GMAT s2LOX.RefTemperature = -183;
+GMAT s2LOX.Volume = 25;
+GMAT s2LOX.FuelDensity = 1141;
+GMAT s2LOX.PressureModel = PressureRegulated;
+
+Create ChemicalTank s2LH2;
+GMAT s2LH2.AllowNegativeFuelMass = true;
+GMAT s2LH2.FuelMass = 5245;
+GMAT s2LH2.Pressure = 2000;
+GMAT s2LH2.Temperature = -253;
+GMAT s2LH2.RefTemperature = -253;
+GMAT s2LH2.Volume = 77;
+GMAT s2LH2.FuelDensity = 70;
+GMAT s2LH2.PressureModel = PressureRegulated;
+
+Create ChemicalThruster YF75DX2;
+GMAT YF75DX2.CoordinateSystem = Local;
+GMAT YF75DX2.Origin = Earth;
+GMAT YF75DX2.Axes = VNB;
+GMAT YF75DX2.ThrustDirection1 = 1;
+GMAT YF75DX2.ThrustDirection2 = 0;
+GMAT YF75DX2.ThrustDirection3 = 0;
+GMAT YF75DX2.DutyCycle = 1;
+GMAT YF75DX2.ThrustScaleFactor = 1;
+GMAT YF75DX2.DecrementMass = true;
+GMAT YF75DX2.Tank = {s2LH2, s2LOX};
+GMAT YF75DX2.MixRatio = [ 1 5.1 ];
+GMAT YF75DX2.GravitationalAccel = 9.810000000000001;
+GMAT YF75DX2.C1 = 176720;
+GMAT YF75DX2.C2 = 0;
+GMAT YF75DX2.C3 = 0;
+GMAT YF75DX2.C4 = 0;
+GMAT YF75DX2.C5 = 0;
+GMAT YF75DX2.C6 = 0;
+GMAT YF75DX2.C7 = 0;
+GMAT YF75DX2.C8 = 0;
+GMAT YF75DX2.C9 = 0;
+GMAT YF75DX2.C10 = 0;
+GMAT YF75DX2.C11 = 0;
+GMAT YF75DX2.C12 = 0;
+GMAT YF75DX2.C13 = 0;
+GMAT YF75DX2.C14 = 0;
+GMAT YF75DX2.C15 = 0;
+GMAT YF75DX2.C16 = 0;
+GMAT YF75DX2.K1 = 442.6;
+GMAT YF75DX2.K2 = 0;
+GMAT YF75DX2.K3 = 0;
+GMAT YF75DX2.K4 = 0;
+GMAT YF75DX2.K5 = 0;
+GMAT YF75DX2.K6 = 0;
+GMAT YF75DX2.K7 = 0;
+GMAT YF75DX2.K8 = 0;
+GMAT YF75DX2.K9 = 0;
+GMAT YF75DX2.K10 = 0;
+GMAT YF75DX2.K11 = 0;
+GMAT YF75DX2.K12 = 0;
+GMAT YF75DX2.K13 = 0;
+GMAT YF75DX2.K14 = 0;
+GMAT YF75DX2.K15 = 0;
+GMAT YF75DX2.K16 = 0;
+
+Create ChemicalThruster YF37;
+GMAT YF37.CoordinateSystem = Local;
+GMAT YF37.Origin = Earth;
+GMAT YF37.Axes = VNB;
+GMAT YF37.ThrustDirection1 = -1;
+GMAT YF37.ThrustDirection2 = 0;
+GMAT YF37.ThrustDirection3 = 0;
+GMAT YF37.DutyCycle = 1;
+GMAT YF37.ThrustScaleFactor = 1;
+GMAT YF37.DecrementMass = true;
+GMAT YF37.Tank = {MMH};
+GMAT YF37.MixRatio = [ 1 ];
+GMAT YF37.GravitationalAccel = 9.810000000000001;
+GMAT YF37.C1 = 3000;
+GMAT YF37.C2 = 0;
+GMAT YF37.C3 = 0;
+GMAT YF37.C4 = 0;
+GMAT YF37.C5 = 0;
+GMAT YF37.C6 = 0;
+GMAT YF37.C7 = 0;
+GMAT YF37.C8 = 0;
+GMAT YF37.C9 = 0;
+GMAT YF37.C10 = 0;
+GMAT YF37.C11 = 0;
+GMAT YF37.C12 = 0;
+GMAT YF37.C13 = 0;
+GMAT YF37.C14 = 0;
+GMAT YF37.C15 = 0;
+GMAT YF37.C16 = 0;
+GMAT YF37.K1 = 316;
+GMAT YF37.K2 = 0;
+GMAT YF37.K3 = 0;
+GMAT YF37.K4 = 0;
+GMAT YF37.K5 = 0;
+GMAT YF37.K6 = 0;
+GMAT YF37.K7 = 0;
+GMAT YF37.K8 = 0;
+GMAT YF37.K9 = 0;
+GMAT YF37.K10 = 0;
+GMAT YF37.K11 = 0;
+GMAT YF37.K12 = 0;
+GMAT YF37.K13 = 0;
+GMAT YF37.K14 = 0;
+GMAT YF37.K15 = 0;
+GMAT YF37.K16 = 0;
+
+Create ChemicalTank MMH;
+GMAT MMH.AllowNegativeFuelMass = true;
+GMAT MMH.FuelMass = 2000;
+GMAT MMH.Pressure = 1500;
+GMAT MMH.Temperature = 20;
+GMAT MMH.RefTemperature = 20;
+GMAT MMH.Volume = 4;
+GMAT MMH.FuelDensity = 880;
+GMAT MMH.PressureModel = PressureRegulated;
+
+%----------------------------------------
+%---------- GroundStations
+%----------------------------------------
+
+Create GroundStation wenchang;
+GMAT wenchang.OrbitColor = Thistle;
+GMAT wenchang.TargetColor = DarkGray;
+GMAT wenchang.CentralBody = Earth;
+GMAT wenchang.StateType = Spherical;
+GMAT wenchang.HorizonReference = Sphere;
+GMAT wenchang.Location1 = 19.317;
+GMAT wenchang.Location2 = 110;
+GMAT wenchang.Location3 = 0.07000000000000001;
+GMAT wenchang.Id = 'StationId';
+GMAT wenchang.IonosphereModel = 'None';
+GMAT wenchang.TroposphereModel = 'None';
+GMAT wenchang.DataSource = 'Constant';
+GMAT wenchang.Temperature = 295.1;
+GMAT wenchang.Pressure = 1013.5;
+GMAT wenchang.Humidity = 55;
+GMAT wenchang.MinimumElevationAngle = 7;
+
+Create GroundStation guess1;
+GMAT guess1.OrbitColor = Thistle;
+GMAT guess1.TargetColor = DarkGray;
+GMAT guess1.CentralBody = Earth;
+GMAT guess1.StateType = Spherical;
+GMAT guess1.HorizonReference = Sphere;
+GMAT guess1.Location1 = 16.05;
+GMAT guess1.Location2 = 125.5;
+GMAT guess1.Location3 = 0;
+GMAT guess1.Id = 'StationId';
+GMAT guess1.IonosphereModel = 'None';
+GMAT guess1.TroposphereModel = 'None';
+GMAT guess1.DataSource = 'Constant';
+GMAT guess1.Temperature = 295.1;
+GMAT guess1.Pressure = 1013.5;
+GMAT guess1.Humidity = 55;
+GMAT guess1.MinimumElevationAngle = 7;
+
+Create GroundStation guess2;
+GMAT guess2.OrbitColor = Thistle;
+GMAT guess2.TargetColor = DarkGray;
+GMAT guess2.CentralBody = Earth;
+GMAT guess2.StateType = Spherical;
+GMAT guess2.HorizonReference = Sphere;
+GMAT guess2.Location1 = -24.89;
+GMAT guess2.Location2 = 235.81;
+GMAT guess2.Location3 = 0;
+GMAT guess2.Id = 'StationId';
+GMAT guess2.IonosphereModel = 'None';
+GMAT guess2.TroposphereModel = 'None';
+GMAT guess2.DataSource = 'Constant';
+GMAT guess2.Temperature = 295.1;
+GMAT guess2.Pressure = 1013.5;
+GMAT guess2.Humidity = 55;
+GMAT guess2.MinimumElevationAngle = 7;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel nearearth_ForceModel;
+GMAT nearearth_ForceModel.CentralBody = Earth;
+GMAT nearearth_ForceModel.PrimaryBodies = {Earth};
+GMAT nearearth_ForceModel.PointMasses = {Luna, Sun};
+GMAT nearearth_ForceModel.Drag = None;
+GMAT nearearth_ForceModel.SRP = On;
+GMAT nearearth_ForceModel.RelativisticCorrection = Off;
+GMAT nearearth_ForceModel.ErrorControl = RSSStep;
+GMAT nearearth_ForceModel.GravityField.Earth.Degree = 4;
+GMAT nearearth_ForceModel.GravityField.Earth.Order = 4;
+GMAT nearearth_ForceModel.GravityField.Earth.StmLimit = 100;
+GMAT nearearth_ForceModel.GravityField.Earth.PotentialFile = 'JGM2.cof';
+GMAT nearearth_ForceModel.GravityField.Earth.TideModel = 'None';
+GMAT nearearth_ForceModel.SRP.Flux = 1367;
+GMAT nearearth_ForceModel.SRP.SRPModel = Spherical;
+GMAT nearearth_ForceModel.SRP.Nominal_Sun = 149597870.691;
+
+Create ForceModel nearluna_ForceModel;
+GMAT nearluna_ForceModel.CentralBody = Luna;
+GMAT nearluna_ForceModel.PrimaryBodies = {Luna};
+GMAT nearluna_ForceModel.PointMasses = {Earth, Sun};
+GMAT nearluna_ForceModel.Drag = None;
+GMAT nearluna_ForceModel.SRP = On;
+GMAT nearluna_ForceModel.RelativisticCorrection = Off;
+GMAT nearluna_ForceModel.ErrorControl = RSSStep;
+GMAT nearluna_ForceModel.GravityField.Luna.Degree = 4;
+GMAT nearluna_ForceModel.GravityField.Luna.Order = 4;
+GMAT nearluna_ForceModel.GravityField.Luna.StmLimit = 100;
+GMAT nearluna_ForceModel.GravityField.Luna.PotentialFile = 'LP165P.cof';
+GMAT nearluna_ForceModel.GravityField.Luna.TideModel = 'None';
+GMAT nearluna_ForceModel.SRP.Flux = 1367;
+GMAT nearluna_ForceModel.SRP.SRPModel = Spherical;
+GMAT nearluna_ForceModel.SRP.Nominal_Sun = 149597870.691;
+
+%----------------------------------------
+%---------- Propagators
+%----------------------------------------
+
+Create Propagator nearearth;
+GMAT nearearth.FM = nearearth_ForceModel;
+GMAT nearearth.Type = PrinceDormand78;
+GMAT nearearth.InitialStepSize = 600;
+GMAT nearearth.Accuracy = 1e-013;
+GMAT nearearth.MinStep = 0;
+GMAT nearearth.MaxStep = 86400;
+GMAT nearearth.MaxStepAttempts = 50;
+GMAT nearearth.StopIfAccuracyIsViolated = true;
+
+Create Propagator nearluna;
+GMAT nearluna.FM = nearluna_ForceModel;
+GMAT nearluna.Type = PrinceDormand78;
+GMAT nearluna.InitialStepSize = 600;
+GMAT nearluna.Accuracy = 9.999999999999999e-012;
+GMAT nearluna.MinStep = 0;
+GMAT nearluna.MaxStep = 86400;
+GMAT nearluna.MaxStepAttempts = 50;
+GMAT nearluna.StopIfAccuracyIsViolated = true;
+
+%----------------------------------------
+%---------- Burns
+%----------------------------------------
+
+Create FiniteBurn s21;
+GMAT s21.Thrusters = {YF75DX2};
+GMAT s21.ThrottleLogicAlgorithm = 'MaxNumberOfThrusters';
+
+Create FiniteBurn DSM;
+GMAT DSM.Thrusters = {YF37};
+GMAT DSM.ThrottleLogicAlgorithm = 'MaxNumberOfThrusters';
+
+Create ImpulsiveBurn DefaultIB;
+GMAT DefaultIB.CoordinateSystem = Local;
+GMAT DefaultIB.Origin = Earth;
+GMAT DefaultIB.Axes = VNB;
+GMAT DefaultIB.Element1 = 0;
+GMAT DefaultIB.Element2 = 0;
+GMAT DefaultIB.Element3 = 0;
+GMAT DefaultIB.DecrementMass = false;
+GMAT DefaultIB.Isp = 300;
+GMAT DefaultIB.GravitationalAccel = 9.810000000000001;
+
+%----------------------------------------
+%---------- Coordinate Systems
+%----------------------------------------
+
+Create CoordinateSystem guess1xyz;
+GMAT guess1xyz.Origin = guess1;
+GMAT guess1xyz.Axes = Topocentric;
+
+Create CoordinateSystem Moonxyz;
+GMAT Moonxyz.Origin = Luna;
+GMAT Moonxyz.Axes = BodyInertial;
+
+%----------------------------------------
+%---------- Solvers
+%----------------------------------------
+
+Create DifferentialCorrector DefaultDC;
+GMAT DefaultDC.ShowProgress = true;
+GMAT DefaultDC.ReportStyle = Normal;
+GMAT DefaultDC.ReportFile = 'DifferentialCorrectorDefaultDC.data';
+GMAT DefaultDC.MaximumIterations = 25;
+GMAT DefaultDC.DerivativeMethod = ForwardDifference;
+GMAT DefaultDC.Algorithm = NewtonRaphson;
+
+%----------------------------------------
+%---------- Arrays, Variables, Strings
+%----------------------------------------
+Create Variable burntime;
+GMAT burntime = 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+
+BeginMissionSequence;
+Target DefaultDC {SolveMode = RunInitialGuess, ExitMode = SaveAndContinue, ShowProgressWindow = true};
+   Vary DefaultDC(change5.VX = 1.590416144320875, {Perturbation = 0.00001, Lower = 0.0, Upper = 13.14159, MaxStep = 0.02, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary DefaultDC(change5.VY = 5.635707965723694, {Perturbation = 0.00001, Lower = 0.0, Upper = 13.14159, MaxStep = 0.02, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary DefaultDC(change5.VZ = 1.021074383795759, {Perturbation = 0.00001, Lower = 0.0, Upper = 13.14159, MaxStep = 0.02, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   
+   GMAT 'burn210s' burntime = 210;
+   BeginFiniteBurn 'stage2burn1' s21(change5);
+   Propagate 'prop' nearearth(change5) {change5.ElapsedSecs = burntime, OrbitColor = [255 255 128]};
+   EndFiniteBurn s21(change5);
+   
+   GMAT 'sliding937s' burntime = 937;
+   Propagate 'sliding' nearearth(change5) {change5.ElapsedSecs = burntime};
+   GMAT 'burn437s' burntime = 437;
+   BeginFiniteBurn 'stage2burn2' s21(change5);
+   Propagate 'prop' nearearth(change5) {change5.ElapsedSecs = burntime, OrbitColor = [128 255 0]};
+   EndFiniteBurn 'EndFiniteBurn2' s21(change5);
+   BeginScript 'stage 2 decouple'
+      GMAT change5.s2LOX.FuelMass = 0;
+      GMAT change5.s2LH2.FuelMass = 0;
+   EndScript;
+   Propagate 'prop to arrive' nearearth(change5) {change5.TAIModJulian = 29182.0415625, OrbitColor = [255 255 0]};
+   Achieve DefaultDC(change5.Moonxyz.X = 0, {Tolerance = 2000});
+   Achieve DefaultDC(change5.Moonxyz.Y = 0, {Tolerance = 2000});
+   Achieve DefaultDC(change5.Moonxyz.Z = 0, {Tolerance = 2000});
+   
+EndTarget;  % For targeter DefaultDC
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
