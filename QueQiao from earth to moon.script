@@ -1,0 +1,435 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2024-03-17 18:19:26
+
+
+%----------------------------------------
+%---------- User-Defined Calculated Points
+%----------------------------------------
+
+Create LibrationPoint l2p;
+GMAT l2p.OrbitColor = GreenYellow;
+GMAT l2p.TargetColor = DarkGray;
+GMAT l2p.Primary = Earth;
+GMAT l2p.Secondary = Luna;
+GMAT l2p.Point = L2;
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft QueQiao;
+GMAT QueQiao.DateFormat = UTCGregorian;
+GMAT QueQiao.Epoch = '28 Mar 2024 11:59:23.000';
+GMAT QueQiao.CoordinateSystem = EarthMJ2000Eq;
+
+GMAT QueQiao.DisplayStateType = Keplerian;
+GMAT QueQiao.SMA = 7000;
+GMAT QueQiao.ECC = 0;
+GMAT QueQiao.INC = 24;
+GMAT QueQiao.RAAN = 0;
+GMAT QueQiao.AOP = 0;
+GMAT QueQiao.TA = 0;
+GMAT QueQiao.DryMass = 800;
+GMAT QueQiao.Cd = 2.2;
+GMAT QueQiao.Cr = 1.8;
+GMAT QueQiao.DragArea = 15;
+GMAT QueQiao.SRPArea = 1;
+GMAT QueQiao.SPADDragScaleFactor = 1;
+
+GMAT QueQiao.SPADSRPScaleFactor = 1;
+GMAT QueQiao.AtmosDensityScaleFactor = 1;
+GMAT QueQiao.ExtendedMassPropertiesModel = 'None';
+GMAT QueQiao.Tanks = {MMH};
+GMAT QueQiao.NAIFId = -10000001;
+GMAT QueQiao.NAIFIdReferenceFrame = -9000001;
+GMAT QueQiao.OrbitColor = Red;
+GMAT QueQiao.TargetColor = Teal;
+GMAT QueQiao.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+GMAT QueQiao.CdSigma = 1e+70;
+GMAT QueQiao.CrSigma = 1e+70;
+GMAT QueQiao.Id = 'SatId';
+GMAT QueQiao.Attitude = CoordinateSystemFixed;
+GMAT QueQiao.SPADSRPInterpolationMethod = Bilinear;
+GMAT QueQiao.SPADSRPScaleFactorSigma = 1e+70;
+GMAT QueQiao.SPADDragInterpolationMethod = Bilinear;
+GMAT QueQiao.SPADDragScaleFactorSigma = 1e+70;
+GMAT QueQiao.AtmosDensityScaleFactorSigma = 1e+70;
+
+GMAT QueQiao.ModelFile = 'aura.3ds';
+GMAT QueQiao.ModelOffsetX = 0;
+GMAT QueQiao.ModelOffsetY = 0;
+GMAT QueQiao.ModelOffsetZ = 0;
+GMAT QueQiao.ModelRotationX = 0;
+GMAT QueQiao.ModelRotationY = 0;
+GMAT QueQiao.ModelRotationZ = 0;
+GMAT QueQiao.ModelScale = 1;
+GMAT QueQiao.AttitudeDisplayStateType = 'Quaternion';
+GMAT QueQiao.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT QueQiao.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT QueQiao.EulerAngleSequence = '321';
+
+%----------------------------------------
+%---------- Hardware Components
+%----------------------------------------
+
+Create ChemicalTank MMH;
+GMAT MMH.AllowNegativeFuelMass = true;
+GMAT MMH.FuelMass = 2200;
+GMAT MMH.Pressure = 1500;
+GMAT MMH.Temperature = 20;
+GMAT MMH.RefTemperature = 20;
+GMAT MMH.Volume = 200;
+GMAT MMH.FuelDensity = 780;
+GMAT MMH.PressureModel = PressureRegulated;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel CR3BP_ForceModel;
+GMAT CR3BP_ForceModel.CentralBody = Earth;
+GMAT CR3BP_ForceModel.PointMasses = {Earth, Luna, Sun};
+GMAT CR3BP_ForceModel.Drag = None;
+GMAT CR3BP_ForceModel.SRP = On;
+GMAT CR3BP_ForceModel.RelativisticCorrection = Off;
+GMAT CR3BP_ForceModel.ErrorControl = RSSStep;
+GMAT CR3BP_ForceModel.SRP.Flux = 1367;
+GMAT CR3BP_ForceModel.SRP.SRPModel = Spherical;
+GMAT CR3BP_ForceModel.SRP.Nominal_Sun = 149597870.691;
+
+%----------------------------------------
+%---------- Propagators
+%----------------------------------------
+
+Create Propagator CR3BP;
+GMAT CR3BP.FM = CR3BP_ForceModel;
+GMAT CR3BP.Type = PrinceDormand78;
+GMAT CR3BP.InitialStepSize = 600;
+GMAT CR3BP.Accuracy = 1e-13;
+GMAT CR3BP.MinStep = 0;
+GMAT CR3BP.MaxStep = 86400;
+GMAT CR3BP.MaxStepAttempts = 50;
+GMAT CR3BP.StopIfAccuracyIsViolated = true;
+
+%----------------------------------------
+%---------- Burns
+%----------------------------------------
+
+Create ImpulsiveBurn TLI;
+GMAT TLI.CoordinateSystem = Local;
+GMAT TLI.Origin = Earth;
+GMAT TLI.Axes = VNB;
+GMAT TLI.Element1 = 0;
+GMAT TLI.Element2 = 0;
+GMAT TLI.Element3 = 0;
+GMAT TLI.DecrementMass = true;
+GMAT TLI.Tank = {MMH};
+GMAT TLI.Isp = 442.6;
+GMAT TLI.GravitationalAccel = 9.81;
+
+Create ImpulsiveBurn DSM1;
+GMAT DSM1.CoordinateSystem = l2pxyz;
+GMAT DSM1.Element1 = 0;
+GMAT DSM1.Element2 = 0;
+GMAT DSM1.Element3 = 0;
+GMAT DSM1.DecrementMass = true;
+GMAT DSM1.Tank = {MMH};
+GMAT DSM1.Isp = 316;
+GMAT DSM1.GravitationalAccel = 9.81;
+
+Create ImpulsiveBurn DSM3;
+GMAT DSM3.CoordinateSystem = Local;
+GMAT DSM3.Origin = Earth;
+GMAT DSM3.Axes = VNB;
+GMAT DSM3.Element1 = 0;
+GMAT DSM3.Element2 = 0;
+GMAT DSM3.Element3 = 0;
+GMAT DSM3.DecrementMass = true;
+GMAT DSM3.Tank = {MMH};
+GMAT DSM3.Isp = 316;
+GMAT DSM3.GravitationalAccel = 9.81;
+
+%----------------------------------------
+%---------- Coordinate Systems
+%----------------------------------------
+
+Create CoordinateSystem moonxyz;
+GMAT moonxyz.Origin = Luna;
+GMAT moonxyz.Axes = BodyInertial;
+
+Create CoordinateSystem l2pxyz;
+GMAT l2pxyz.Origin = l2p;
+GMAT l2pxyz.Axes = ObjectReferenced;
+GMAT l2pxyz.XAxis = R;
+GMAT l2pxyz.ZAxis = N;
+GMAT l2pxyz.Primary = Earth;
+GMAT l2pxyz.Secondary = Luna;
+
+%----------------------------------------
+%---------- Solvers
+%----------------------------------------
+
+Create DifferentialCorrector DefaultDC;
+GMAT DefaultDC.ShowProgress = true;
+GMAT DefaultDC.ReportStyle = Normal;
+GMAT DefaultDC.ReportFile = 'DifferentialCorrectorDefaultDC.data';
+GMAT DefaultDC.MaximumIterations = 25;
+GMAT DefaultDC.DerivativeMethod = ForwardDifference;
+GMAT DefaultDC.Algorithm = NewtonRaphson;
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create OrbitView L2PView;
+GMAT L2PView.SolverIterations = Current;
+GMAT L2PView.UpperLeft = [ 0.01196581196581197 0.3577512776831346 ];
+GMAT L2PView.Size = [ 0.2914529914529915 0.5664395229982965 ];
+GMAT L2PView.RelativeZOrder = 144;
+GMAT L2PView.Maximized = false;
+GMAT L2PView.Add = {QueQiao, l2p, Luna, Earth};
+GMAT L2PView.CoordinateSystem = l2pxyz;
+GMAT L2PView.DrawObject = [ true true true true ];
+GMAT L2PView.DataCollectFrequency = 1;
+GMAT L2PView.UpdatePlotFrequency = 50;
+GMAT L2PView.NumPointsToRedraw = 0;
+GMAT L2PView.ShowPlot = true;
+GMAT L2PView.MaxPlotPoints = 60000;
+GMAT L2PView.ShowLabels = true;
+GMAT L2PView.ViewPointReference = l2p;
+GMAT L2PView.ViewPointVector = [ 110000 -10000 30000 ];
+GMAT L2PView.ViewDirection = l2p;
+GMAT L2PView.ViewScaleFactor = 1;
+GMAT L2PView.ViewUpCoordinateSystem = l2pxyz;
+GMAT L2PView.ViewUpAxis = Z;
+GMAT L2PView.EclipticPlane = Off;
+GMAT L2PView.XYPlane = On;
+GMAT L2PView.WireFrame = Off;
+GMAT L2PView.Axes = On;
+GMAT L2PView.Grid = Off;
+GMAT L2PView.SunLine = Off;
+GMAT L2PView.UseInitialView = On;
+GMAT L2PView.StarCount = 7000;
+GMAT L2PView.EnableStars = Off;
+GMAT L2PView.EnableConstellations = Off;
+
+Create ReportFile ReportFile1;
+GMAT ReportFile1.SolverIterations = Current;
+GMAT ReportFile1.UpperLeft = [ 0.04705882352941176 0.05363528009535161 ];
+GMAT ReportFile1.Size = [ 0.6276470588235294 0.8069129916567342 ];
+GMAT ReportFile1.RelativeZOrder = 6;
+GMAT ReportFile1.Maximized = false;
+GMAT ReportFile1.Filename = 'ReportFile1.txt';
+GMAT ReportFile1.Precision = 16;
+GMAT ReportFile1.Add = {QueQiao.A1Gregorian, QueQiao.l2pxyz.VMAG};
+GMAT ReportFile1.WriteHeaders = true;
+GMAT ReportFile1.LeftJustify = On;
+GMAT ReportFile1.ZeroFill = Off;
+GMAT ReportFile1.FixedWidth = true;
+GMAT ReportFile1.Delimiter = ' ';
+GMAT ReportFile1.ColumnWidth = 23;
+GMAT ReportFile1.WriteReport = true;
+
+Create OrbitView MoonView;
+GMAT MoonView.SolverIterations = Current;
+GMAT MoonView.UpperLeft = [ 0.6145299145299146 0.3568994889267462 ];
+GMAT MoonView.Size = [ 0.2931623931623932 0.565587734241908 ];
+GMAT MoonView.RelativeZOrder = 10;
+GMAT MoonView.Maximized = false;
+GMAT MoonView.Add = {QueQiao, Earth, l2p, Luna};
+GMAT MoonView.CoordinateSystem = moonxyz;
+GMAT MoonView.DrawObject = [ true true true true ];
+GMAT MoonView.DataCollectFrequency = 1;
+GMAT MoonView.UpdatePlotFrequency = 50;
+GMAT MoonView.NumPointsToRedraw = 0;
+GMAT MoonView.ShowPlot = true;
+GMAT MoonView.MaxPlotPoints = 60000;
+GMAT MoonView.ShowLabels = true;
+GMAT MoonView.ViewPointReference = Luna;
+GMAT MoonView.ViewPointVector = [ 0 0 13000 ];
+GMAT MoonView.ViewDirection = Luna;
+GMAT MoonView.ViewScaleFactor = 1;
+GMAT MoonView.ViewUpCoordinateSystem = moonxyz;
+GMAT MoonView.ViewUpAxis = Z;
+GMAT MoonView.EclipticPlane = Off;
+GMAT MoonView.XYPlane = On;
+GMAT MoonView.WireFrame = Off;
+GMAT MoonView.Axes = On;
+GMAT MoonView.Grid = Off;
+GMAT MoonView.SunLine = Off;
+GMAT MoonView.UseInitialView = On;
+GMAT MoonView.StarCount = 7000;
+GMAT MoonView.EnableStars = Off;
+GMAT MoonView.EnableConstellations = Off;
+
+Create OrbitView EarthView;
+GMAT EarthView.SolverIterations = Current;
+GMAT EarthView.UpperLeft = [ 0.308974358974359 0.3577512776831346 ];
+GMAT EarthView.Size = [ 0.2974358974358974 0.565587734241908 ];
+GMAT EarthView.RelativeZOrder = 5;
+GMAT EarthView.Maximized = false;
+GMAT EarthView.Add = {QueQiao, Earth, l2p, Luna};
+GMAT EarthView.CoordinateSystem = EarthMJ2000Eq;
+GMAT EarthView.DrawObject = [ true true true true ];
+GMAT EarthView.DataCollectFrequency = 1;
+GMAT EarthView.UpdatePlotFrequency = 50;
+GMAT EarthView.NumPointsToRedraw = 0;
+GMAT EarthView.ShowPlot = true;
+GMAT EarthView.MaxPlotPoints = 20000;
+GMAT EarthView.ShowLabels = true;
+GMAT EarthView.ViewPointReference = Earth;
+GMAT EarthView.ViewPointVector = [ 0 0 300000 ];
+GMAT EarthView.ViewDirection = Earth;
+GMAT EarthView.ViewScaleFactor = 1;
+GMAT EarthView.ViewUpCoordinateSystem = EarthMJ2000Eq;
+GMAT EarthView.ViewUpAxis = Z;
+GMAT EarthView.EclipticPlane = Off;
+GMAT EarthView.XYPlane = On;
+GMAT EarthView.WireFrame = Off;
+GMAT EarthView.Axes = On;
+GMAT EarthView.Grid = Off;
+GMAT EarthView.SunLine = Off;
+GMAT EarthView.UseInitialView = On;
+GMAT EarthView.StarCount = 7000;
+GMAT EarthView.EnableStars = Off;
+GMAT EarthView.EnableConstellations = Off;
+
+%----------------------------------------
+%---------- Arrays, Variables, Strings
+%----------------------------------------
+Create Variable sidingtime;
+GMAT sidingtime = 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+
+BeginMissionSequence;
+Target 'to Moon' DefaultDC {SolveMode = RunInitialGuess, ExitMode = SaveAndContinue, ShowProgressWindow = true};
+   Vary 'Vary TLI.v' DefaultDC(TLI.Element1 = 3.025662810999809, {Perturbation = 0.0001, Lower = 3, Upper = 4, MaxStep = 0.1, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Vary INC' DefaultDC(QueQiao.INC = 29.50791644569695, {Perturbation = 0.0001, Lower = 20, Upper = 30, MaxStep = 1, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   GMAT 'siding1722s' sidingtime = 1722;
+   Propagate 'siding on LEO' CR3BP(QueQiao) {QueQiao.ElapsedSecs = sidingtime};
+   GMAT 'Vary TLI.n' TLI.Element2 = -0.18337;
+   Maneuver 'Apply TLI' TLI(QueQiao);
+   Propagate 'prop 3 days' CR3BP(QueQiao) {QueQiao.ElapsedDays = 3};
+   Propagate 'prop to moon pe' CR3BP(QueQiao) {QueQiao.Luna.Periapsis};
+   Achieve 'Achieve moonxyz.Y = 600' DefaultDC(QueQiao.moonxyz.Y = 600.0, {Tolerance = 0.1});
+   Achieve 'Achieve l2pxyz.Z = -800' DefaultDC(QueQiao.l2pxyz.Z = -800, {Tolerance = 0.1});
+EndTarget;  % For targeter DefaultDC
+Target 'to Halo Orbit' DefaultDC {SolveMode = RunInitialGuess, ExitMode = SaveAndContinue, ShowProgressWindow = true};
+   Vary 'Vary DSM1.v' DefaultDC(DSM1.Element1 = -0.3263822704741368, {Perturbation = 0.0001, Lower = -10, Upper = 10, MaxStep = 0.1, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Vary DSM1.n' DefaultDC(DSM1.Element2 = 0.01056303816645143, {Perturbation = 0.0001, Lower = -10, Upper = 10, MaxStep = 0.0002, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Vary DSM1.b' DefaultDC(DSM1.Element3 = 0.04442939311163792, {Perturbation = 0.0001, Lower = -10, Upper = 10, MaxStep = 0.002, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver 'Apply DSM1' DSM1(QueQiao);
+   Propagate 'Prop to Halo Orbit' CR3BP(QueQiao) {QueQiao.ElapsedDays = 3.3};
+   Achieve DefaultDC(QueQiao.l2pxyz.Y = 0, {Tolerance = 0.1});
+   Achieve DefaultDC(QueQiao.l2pxyz.X = 9000.0, {Tolerance = 0.1});
+   Achieve DefaultDC(QueQiao.l2pxyz.Z = 20000.0, {Tolerance = 0.1});
+EndTarget;  % For targeter DefaultDC
+Propagate 'Prop to Halo Orbit inject point' CR3BP(QueQiao) {QueQiao.l2pxyz.Y = 0};
+
+BeginScript 'Apply DSM2'
+   GMAT QueQiao.CoordinateSystem = l2pxyz;
+   GMAT QueQiao.VX = 0;
+   
+   GMAT QueQiao.VZ = 0;
+EndScript;
+Target 'stay at Halo Orbit' DefaultDC {SolveMode = RunInitialGuess, ExitMode = SaveAndContinue, ShowProgressWindow = true};
+   Vary 'Vary DSM3.v' DefaultDC(DSM3.Element1 = 0.03171372205233926, {Perturbation = 0.0001, Lower = -10, Upper = 10, MaxStep = 0.02, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Vary DSM3.n' DefaultDC(DSM3.Element2 = -0.003969742304019264, {Perturbation = 0.0001, Lower = -10, Upper = 10, MaxStep = 0.02, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Vary DSM3.b' DefaultDC(DSM3.Element3 = 0.01467175179765807, {Perturbation = 0.0001, Lower = -10, Upper = 10, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver 'Apply DSM3' DSM3(QueQiao);
+   Propagate CR3BP(QueQiao) {QueQiao.l2pxyz.Y = 0};
+   Achieve DefaultDC(QueQiao.l2pxyz.VX = 0, {Tolerance = 0.001});
+   Achieve DefaultDC(QueQiao.l2pxyz.VZ = 0, {Tolerance = 0.001});
+EndTarget;  % For targeter DefaultDC
+Propagate 'Prop 7 days' CR3BP(QueQiao) {QueQiao.ElapsedDays = 7};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
