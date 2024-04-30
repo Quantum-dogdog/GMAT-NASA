@@ -44,4 +44,4 @@ Tianwen4括号里带质量的两个算例的任务时间是和Trajectory Browser
 
 #8
 
-新增了QueQiao from earth to moon，模拟鹊桥3号任务（平行世界中今年5月1日发射），该模拟采用月球低能转移轨道进驻Halo Orbit. TLI deltaV是3.02km/s量级,近月点机动300m/s量级（《地月拉格朗日L2点中继星轨道分析与设计》论文中最优是200m/s量级，当然了本算例中的Halo Orbit轨道参数与论文不同）,Halo Orbit 插入机动50m/s量级。
+新增了QueQiao from earth to moon，模拟鹊桥3号任务（平行世界中今年3月28日发射），该模拟采用月球引力辅助转移轨道进驻Halo Orbit. TLI deltaV是3.02km/s量级,近月点机动300m/s量级（《地月拉格朗日L2点中继星轨道分析与设计》论文中最优是200m/s量级，当然了本算例中的Halo Orbit轨道参数与论文不同）,Halo Orbit 插入机动50m/s量级。
