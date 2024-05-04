@@ -1,0 +1,292 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2024-05-04 11:43:27
+
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft Change6;
+GMAT Change6.DateFormat = UTCGregorian;
+GMAT Change6.Epoch = '03 May 2024 10:04:27.589';
+GMAT Change6.CoordinateSystem = EarthMJ2000Eq;
+GMAT Change6.DisplayStateType = Keplerian;
+GMAT Change6.SMA = 191583.4700000073;
+GMAT Change6.ECC = 0.9660000000000013;
+GMAT Change6.INC = 23.34999999999996;
+GMAT Change6.RAAN = 336.198;
+GMAT Change6.AOP = 239.7239999999999;
+GMAT Change6.TA = 20.696;
+GMAT Change6.DryMass = 4000;
+GMAT Change6.Cd = 2.2;
+GMAT Change6.Cr = 1.8;
+GMAT Change6.DragArea = 15;
+GMAT Change6.SRPArea = 1;
+GMAT Change6.SPADDragScaleFactor = 1;
+GMAT Change6.SPADSRPScaleFactor = 1;
+GMAT Change6.Tanks = {MMH};
+GMAT Change6.NAIFId = -10000001;
+GMAT Change6.NAIFIdReferenceFrame = -9000001;
+GMAT Change6.OrbitColor = Red;
+GMAT Change6.TargetColor = Teal;
+GMAT Change6.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+GMAT Change6.CdSigma = 1e+70;
+GMAT Change6.CrSigma = 1e+70;
+GMAT Change6.Id = 'SatId';
+GMAT Change6.Attitude = CoordinateSystemFixed;
+GMAT Change6.SPADSRPInterpolationMethod = Bilinear;
+GMAT Change6.SPADSRPScaleFactorSigma = 1e+70;
+GMAT Change6.SPADDragInterpolationMethod = Bilinear;
+GMAT Change6.SPADDragScaleFactorSigma = 1e+70;
+GMAT Change6.ModelFile = 'aura.3ds';
+GMAT Change6.ModelOffsetX = 0;
+GMAT Change6.ModelOffsetY = 0;
+GMAT Change6.ModelOffsetZ = 0;
+GMAT Change6.ModelRotationX = 0;
+GMAT Change6.ModelRotationY = 0;
+GMAT Change6.ModelRotationZ = 0;
+GMAT Change6.ModelScale = 1;
+GMAT Change6.AttitudeDisplayStateType = 'Quaternion';
+GMAT Change6.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT Change6.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT Change6.EulerAngleSequence = '321';
+
+%----------------------------------------
+%---------- Hardware Components
+%----------------------------------------
+
+Create ChemicalTank MMH;
+GMAT MMH.AllowNegativeFuelMass = false;
+GMAT MMH.FuelMass = 4000;
+GMAT MMH.Pressure = 1500;
+GMAT MMH.Temperature = 20;
+GMAT MMH.RefTemperature = 20;
+GMAT MMH.Volume = 40;
+GMAT MMH.FuelDensity = 1260;
+GMAT MMH.PressureModel = PressureRegulated;
+
+
+
+
+
+
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel NearEarth_ForceModel;
+GMAT NearEarth_ForceModel.CentralBody = Earth;
+GMAT NearEarth_ForceModel.PrimaryBodies = {Earth};
+GMAT NearEarth_ForceModel.PointMasses = {Luna, Sun};
+GMAT NearEarth_ForceModel.Drag = None;
+GMAT NearEarth_ForceModel.SRP = On;
+GMAT NearEarth_ForceModel.RelativisticCorrection = Off;
+GMAT NearEarth_ForceModel.ErrorControl = RSSStep;
+GMAT NearEarth_ForceModel.GravityField.Earth.Degree = 4;
+GMAT NearEarth_ForceModel.GravityField.Earth.Order = 4;
+GMAT NearEarth_ForceModel.GravityField.Earth.StmLimit = 100;
+GMAT NearEarth_ForceModel.GravityField.Earth.PotentialFile = 'JGM2.cof';
+GMAT NearEarth_ForceModel.GravityField.Earth.TideModel = 'None';
+GMAT NearEarth_ForceModel.SRP.Flux = 1367;
+GMAT NearEarth_ForceModel.SRP.SRPModel = Spherical;
+GMAT NearEarth_ForceModel.SRP.Nominal_Sun = 149597870.691;
+
+Create ForceModel NearMoon_ForceModel;
+GMAT NearMoon_ForceModel.CentralBody = Luna;
+GMAT NearMoon_ForceModel.PrimaryBodies = {Luna};
+GMAT NearMoon_ForceModel.PointMasses = {Earth, Sun};
+GMAT NearMoon_ForceModel.Drag = None;
+GMAT NearMoon_ForceModel.SRP = On;
+GMAT NearMoon_ForceModel.RelativisticCorrection = Off;
+GMAT NearMoon_ForceModel.ErrorControl = RSSStep;
+GMAT NearMoon_ForceModel.GravityField.Luna.Degree = 4;
+GMAT NearMoon_ForceModel.GravityField.Luna.Order = 4;
+GMAT NearMoon_ForceModel.GravityField.Luna.StmLimit = 100;
+GMAT NearMoon_ForceModel.GravityField.Luna.PotentialFile = 'LP165P.cof';
+GMAT NearMoon_ForceModel.GravityField.Luna.TideModel = 'None';
+GMAT NearMoon_ForceModel.SRP.Flux = 1367;
+GMAT NearMoon_ForceModel.SRP.SRPModel = Spherical;
+GMAT NearMoon_ForceModel.SRP.Nominal_Sun = 149597870.691;
+
+%----------------------------------------
+%---------- Propagators
+%----------------------------------------
+
+Create Propagator NearEarth;
+GMAT NearEarth.FM = NearEarth_ForceModel;
+GMAT NearEarth.Type = PrinceDormand78;
+GMAT NearEarth.InitialStepSize = 600;
+GMAT NearEarth.Accuracy = 1e-13;
+GMAT NearEarth.MinStep = 0;
+GMAT NearEarth.MaxStep = 86400;
+GMAT NearEarth.MaxStepAttempts = 50;
+GMAT NearEarth.StopIfAccuracyIsViolated = true;
+
+Create Propagator NearMoon;
+GMAT NearMoon.FM = NearMoon_ForceModel;
+GMAT NearMoon.Type = PrinceDormand78;
+GMAT NearMoon.InitialStepSize = 600;
+GMAT NearMoon.Accuracy = 9.999999999999999e-12;
+GMAT NearMoon.MinStep = 0;
+GMAT NearMoon.MaxStep = 86400;
+GMAT NearMoon.MaxStepAttempts = 50;
+GMAT NearMoon.StopIfAccuracyIsViolated = true;
+
+%----------------------------------------
+%---------- Burns
+%----------------------------------------
+
+Create ImpulsiveBurn LOI;
+GMAT LOI.CoordinateSystem = Local;
+GMAT LOI.Origin = Earth;
+GMAT LOI.Axes = VNB;
+GMAT LOI.Element1 = -0.3;
+GMAT LOI.Element2 = 0;
+GMAT LOI.Element3 = 0;
+GMAT LOI.DecrementMass = true;
+GMAT LOI.Tank = {MMH};
+GMAT LOI.Isp = 316;
+GMAT LOI.GravitationalAccel = 9.81;
+
+%----------------------------------------
+%---------- Coordinate Systems
+%----------------------------------------
+
+Create CoordinateSystem lunaxyz;
+GMAT lunaxyz.Origin = Luna;
+GMAT lunaxyz.Axes = BodyInertial;
+
+%----------------------------------------
+%---------- Solvers
+%----------------------------------------
+
+Create DifferentialCorrector DefaultDC;
+GMAT DefaultDC.ShowProgress = true;
+GMAT DefaultDC.ReportStyle = Normal;
+GMAT DefaultDC.ReportFile = 'DifferentialCorrectorDefaultDC.data';
+GMAT DefaultDC.MaximumIterations = 25;
+GMAT DefaultDC.DerivativeMethod = ForwardDifference;
+GMAT DefaultDC.Algorithm = NewtonRaphson;
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create OrbitView EarthView;
+GMAT EarthView.SolverIterations = Current;
+GMAT EarthView.UpperLeft = [ 0.2194117647058824 0.3723150357995227 ];
+GMAT EarthView.Size = [ 0.37 0.6085918854415274 ];
+GMAT EarthView.RelativeZOrder = 351;
+GMAT EarthView.Maximized = false;
+GMAT EarthView.Add = {Change6, Earth, Luna};
+GMAT EarthView.CoordinateSystem = EarthMJ2000Eq;
+GMAT EarthView.DrawObject = [ true true true ];
+GMAT EarthView.DataCollectFrequency = 1;
+GMAT EarthView.UpdatePlotFrequency = 50;
+GMAT EarthView.NumPointsToRedraw = 0;
+GMAT EarthView.ShowPlot = true;
+GMAT EarthView.MaxPlotPoints = 20000;
+GMAT EarthView.ShowLabels = true;
+GMAT EarthView.ViewPointReference = Earth;
+GMAT EarthView.ViewPointVector = [ -20000 -100000 -2000 ];
+GMAT EarthView.ViewDirection = Earth;
+GMAT EarthView.ViewScaleFactor = 1;
+GMAT EarthView.ViewUpCoordinateSystem = EarthMJ2000Eq;
+GMAT EarthView.ViewUpAxis = Z;
+GMAT EarthView.EclipticPlane = Off;
+GMAT EarthView.XYPlane = On;
+GMAT EarthView.WireFrame = Off;
+GMAT EarthView.Axes = On;
+GMAT EarthView.Grid = Off;
+GMAT EarthView.SunLine = Off;
+GMAT EarthView.UseInitialView = On;
+GMAT EarthView.StarCount = 7000;
+GMAT EarthView.EnableStars = Off;
+GMAT EarthView.EnableConstellations = Off;
+
+Create GroundTrackPlot WenChangTrack;
+GMAT WenChangTrack.SolverIterations = Current;
+GMAT WenChangTrack.UpperLeft = [ 0.005882352941176471 0.7147971360381862 ];
+GMAT WenChangTrack.Size = [ 0.2117647058823529 0.2661097852028639 ];
+GMAT WenChangTrack.RelativeZOrder = 160;
+GMAT WenChangTrack.Maximized = false;
+GMAT WenChangTrack.Add = {Change6};
+GMAT WenChangTrack.DataCollectFrequency = 1;
+GMAT WenChangTrack.UpdatePlotFrequency = 50;
+GMAT WenChangTrack.NumPointsToRedraw = 0;
+GMAT WenChangTrack.ShowPlot = true;
+GMAT WenChangTrack.MaxPlotPoints = 20000;
+GMAT WenChangTrack.CentralBody = Earth;
+GMAT WenChangTrack.TextureMap = 'ModifiedBlueMarble.jpg';
+
+Create OrbitView MoonView;
+GMAT MoonView.SolverIterations = Current;
+GMAT MoonView.UpperLeft = [ 0.591764705882353 0.3687350835322196 ];
+GMAT MoonView.Size = [ 0.3935294117647059 0.6133651551312649 ];
+GMAT MoonView.RelativeZOrder = 314;
+GMAT MoonView.Maximized = false;
+GMAT MoonView.Add = {Change6, Earth, Luna};
+GMAT MoonView.CoordinateSystem = lunaxyz;
+GMAT MoonView.DrawObject = [ true true true ];
+GMAT MoonView.DataCollectFrequency = 1;
+GMAT MoonView.UpdatePlotFrequency = 50;
+GMAT MoonView.NumPointsToRedraw = 0;
+GMAT MoonView.ShowPlot = true;
+GMAT MoonView.MaxPlotPoints = 20000;
+GMAT MoonView.ShowLabels = true;
+GMAT MoonView.ViewPointReference = Luna;
+GMAT MoonView.ViewPointVector = [ 50000 60000 6000 ];
+GMAT MoonView.ViewDirection = Luna;
+GMAT MoonView.ViewScaleFactor = 1;
+GMAT MoonView.ViewUpCoordinateSystem = lunaxyz;
+GMAT MoonView.ViewUpAxis = Z;
+GMAT MoonView.EclipticPlane = Off;
+GMAT MoonView.XYPlane = On;
+GMAT MoonView.WireFrame = Off;
+GMAT MoonView.Axes = On;
+GMAT MoonView.Grid = Off;
+GMAT MoonView.SunLine = Off;
+GMAT MoonView.UseInitialView = On;
+GMAT MoonView.StarCount = 7000;
+GMAT MoonView.EnableStars = Off;
+GMAT MoonView.EnableConstellations = Off;
+
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+
+BeginMissionSequence;
+Target 'to canzhaodian' DefaultDC {SolveMode = RunInitialGuess, ExitMode = SaveAndContinue, ShowProgressWindow = true};
+   Vary 'Vary AOP' DefaultDC(Change6.AOP = 239.7, {Perturbation = 0.0001, Lower = 210, Upper = 280, MaxStep = 10, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary 'Vary RAAN' DefaultDC(Change6.RAAN = 349.4, {Perturbation = 0.0001, Lower = 300, Upper = 360, MaxStep = 10, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Propagate 'Prop to canzhaodian' NearEarth(Change6) {Change6.TAIModJulian = 30433.94766203704};
+   Achieve 'Achieve feixinggaodu' DefaultDC(Change6.Earth.Altitude = 11869.1680, {Tolerance = 0.01});
+   Achieve 'Achieve weidu' DefaultDC(Change6.Earth.Latitude = -5.0397, {Tolerance = 0.001});
+   Achieve 'Achieve jingdu' DefaultDC(Change6.Earth.Longitude = -45.4217, {Tolerance = 0.001});
+EndTarget;  % For targeter DefaultDC
+Propagate 'Prop to Moon pe' NearEarth(Change6) {Change6.Luna.Periapsis};
+Target 'first LOI' DefaultDC {SolveMode = RunInitialGuess, ExitMode = SaveAndContinue, ShowProgressWindow = true};
+   Vary 'Vary LOI.v' DefaultDC(LOI.Element1 = -0.2724967377237952, {Perturbation = 0.0001, Lower = -10, Upper = 10, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver 'Apply LOI' LOI(Change6);
+   Propagate 'Prop to Moon ap' NearMoon(Change6) {Change6.Luna.Apoapsis};
+   Achieve 'Achieve ap=30000' DefaultDC(Change6.Luna.RMAG = 30000.0, {Tolerance = 0.1});
+EndTarget;  % For targeter DefaultDC
+Propagate 'Prop to pe' NearMoon(Change6) {Change6.Luna.Periapsis};
+Target 'second LOI' DefaultDC {SolveMode = RunInitialGuess, ExitMode = SaveAndContinue, ShowProgressWindow = true};
+   Vary 'Vary LOI.v' DefaultDC(LOI.Element1 = -0.3202310492242347, {Perturbation = 0.0001, Lower = -10, Upper = 10, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver 'Apply LOI' LOI(Change6);
+   Propagate 'Prop to ap' NearMoon(Change6) {Change6.Luna.Apoapsis};
+   Achieve 'Achieve ap=7000' DefaultDC(Change6.Luna.RMAG = 7000.0, {Tolerance = 0.1});
+EndTarget;  % For targeter DefaultDC
+Propagate 'Prop pe' NearMoon(Change6) {Change6.Luna.Periapsis};
+Maneuver 'third LOI' LOI(Change6);
+Propagate 'Prop ap' NearMoon(Change6) {Change6.ElapsedSecs = 12000.0};
+
+
+
+
+
+
+
