@@ -1,0 +1,336 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2024-05-12 13:53:02
+
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft feichuan;
+GMAT feichuan.DateFormat = TAIModJulian;
+GMAT feichuan.Epoch = '30680';
+GMAT feichuan.CoordinateSystem = EarthMJ2000Eq;
+GMAT feichuan.DisplayStateType = Keplerian;
+GMAT feichuan.SMA = 7191.938817629034;
+GMAT feichuan.ECC = 0.02454974900598217;
+GMAT feichuan.INC = 0;
+GMAT feichuan.RAAN = 0;
+GMAT feichuan.AOP = 260.8053537307942;
+GMAT feichuan.TA = 99.88774933204496;
+GMAT feichuan.DryMass = 850;
+GMAT feichuan.Cd = 2.2;
+GMAT feichuan.Cr = 1.8;
+GMAT feichuan.DragArea = 15;
+GMAT feichuan.SRPArea = 1;
+GMAT feichuan.SPADDragScaleFactor = 1;
+GMAT feichuan.SPADSRPScaleFactor = 1;
+GMAT feichuan.NAIFId = -10000001;
+GMAT feichuan.NAIFIdReferenceFrame = -9000001;
+GMAT feichuan.OrbitColor = Red;
+GMAT feichuan.TargetColor = Teal;
+GMAT feichuan.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+GMAT feichuan.CdSigma = 1e+70;
+GMAT feichuan.CrSigma = 1e+70;
+GMAT feichuan.Id = 'SatId';
+GMAT feichuan.Attitude = CoordinateSystemFixed;
+GMAT feichuan.SPADSRPInterpolationMethod = Bilinear;
+GMAT feichuan.SPADSRPScaleFactorSigma = 1e+70;
+GMAT feichuan.SPADDragInterpolationMethod = Bilinear;
+GMAT feichuan.SPADDragScaleFactorSigma = 1e+70;
+GMAT feichuan.ModelFile = 'aura.3ds';
+GMAT feichuan.ModelOffsetX = 0;
+GMAT feichuan.ModelOffsetY = 0;
+GMAT feichuan.ModelOffsetZ = 0;
+GMAT feichuan.ModelRotationX = 0;
+GMAT feichuan.ModelRotationY = 0;
+GMAT feichuan.ModelRotationZ = 0;
+GMAT feichuan.ModelScale = 1;
+GMAT feichuan.AttitudeDisplayStateType = 'Quaternion';
+GMAT feichuan.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT feichuan.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT feichuan.EulerAngleSequence = '321';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel onlyEarth_ForceModel;
+GMAT onlyEarth_ForceModel.CentralBody = Earth;
+GMAT onlyEarth_ForceModel.PrimaryBodies = {Earth};
+GMAT onlyEarth_ForceModel.Drag = None;
+GMAT onlyEarth_ForceModel.SRP = Off;
+GMAT onlyEarth_ForceModel.RelativisticCorrection = Off;
+GMAT onlyEarth_ForceModel.ErrorControl = RSSStep;
+GMAT onlyEarth_ForceModel.GravityField.Earth.Degree = 4;
+GMAT onlyEarth_ForceModel.GravityField.Earth.Order = 4;
+GMAT onlyEarth_ForceModel.GravityField.Earth.StmLimit = 100;
+GMAT onlyEarth_ForceModel.GravityField.Earth.PotentialFile = 'JGM2.cof';
+GMAT onlyEarth_ForceModel.GravityField.Earth.TideModel = 'None';
+
+Create ForceModel onlySun_ForceModel;
+GMAT onlySun_ForceModel.CentralBody = Sun;
+GMAT onlySun_ForceModel.PointMasses = {Sun};
+GMAT onlySun_ForceModel.Drag = None;
+GMAT onlySun_ForceModel.SRP = Off;
+GMAT onlySun_ForceModel.RelativisticCorrection = Off;
+GMAT onlySun_ForceModel.ErrorControl = RSSStep;
+
+%----------------------------------------
+%---------- Propagators
+%----------------------------------------
+
+Create Propagator onlyEarth;
+GMAT onlyEarth.FM = onlyEarth_ForceModel;
+GMAT onlyEarth.Type = PrinceDormand78;
+GMAT onlyEarth.InitialStepSize = 600;
+GMAT onlyEarth.Accuracy = 1e-13;
+GMAT onlyEarth.MinStep = 0;
+GMAT onlyEarth.MaxStep = 86400;
+GMAT onlyEarth.MaxStepAttempts = 50;
+GMAT onlyEarth.StopIfAccuracyIsViolated = true;
+
+Create Propagator onlySun;
+GMAT onlySun.FM = onlySun_ForceModel;
+GMAT onlySun.Type = PrinceDormand78;
+GMAT onlySun.InitialStepSize = 600;
+GMAT onlySun.Accuracy = 1e-13;
+GMAT onlySun.MinStep = 0;
+GMAT onlySun.MaxStep = 86400;
+GMAT onlySun.MaxStepAttempts = 50;
+GMAT onlySun.StopIfAccuracyIsViolated = true;
+
+%----------------------------------------
+%---------- Burns
+%----------------------------------------
+
+Create ImpulsiveBurn DSM;
+GMAT DSM.CoordinateSystem = Local;
+GMAT DSM.Origin = Earth;
+GMAT DSM.Axes = VNB;
+GMAT DSM.Element1 = 0;
+GMAT DSM.Element2 = 0;
+GMAT DSM.Element3 = 0;
+GMAT DSM.DecrementMass = false;
+GMAT DSM.Isp = 300;
+GMAT DSM.GravitationalAccel = 9.81;
+
+%----------------------------------------
+%---------- Coordinate Systems
+%----------------------------------------
+
+Create CoordinateSystem earthmoonrot;
+GMAT earthmoonrot.Origin = Earth;
+GMAT earthmoonrot.Axes = ObjectReferenced;
+GMAT earthmoonrot.XAxis = R;
+GMAT earthmoonrot.ZAxis = N;
+GMAT earthmoonrot.Primary = Luna;
+GMAT earthmoonrot.Secondary = Earth;
+
+Create CoordinateSystem sunxyz;
+GMAT sunxyz.Origin = Sun;
+GMAT sunxyz.Axes = BodyInertial;
+
+Create CoordinateSystem marxyz;
+GMAT marxyz.Origin = Mars;
+GMAT marxyz.Axes = BodyInertial;
+
+%----------------------------------------
+%---------- Solvers
+%----------------------------------------
+
+Create DifferentialCorrector DC1;
+GMAT DC1.ShowProgress = true;
+GMAT DC1.ReportStyle = Normal;
+GMAT DC1.ReportFile = 'DifferentialCorrectorDC1.data';
+GMAT DC1.MaximumIterations = 25;
+GMAT DC1.DerivativeMethod = ForwardDifference;
+GMAT DC1.Algorithm = NewtonRaphson;
+
+Create Yukon Yukon1;
+GMAT Yukon1.ShowProgress = true;
+GMAT Yukon1.ReportStyle = Normal;
+GMAT Yukon1.ReportFile = 'YukonYukon1.data';
+GMAT Yukon1.MaximumIterations = 200;
+GMAT Yukon1.UseCentralDifferences = false;
+GMAT Yukon1.FeasibilityTolerance = 0.0001;
+GMAT Yukon1.HessianUpdateMethod = SelfScaledBFGS;
+GMAT Yukon1.MaximumFunctionEvals = 1000;
+GMAT Yukon1.OptimalityTolerance = 0.0001;
+GMAT Yukon1.FunctionTolerance = 0.0001;
+GMAT Yukon1.MaximumElasticWeight = 10000;
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create OrbitView EarthView;
+GMAT EarthView.SolverIterations = Current;
+GMAT EarthView.UpperLeft = [ 0.5879396984924623 0.3198090692124105 ];
+GMAT EarthView.Size = [ 0.403894472361809 0.6646778042959427 ];
+GMAT EarthView.RelativeZOrder = 643;
+GMAT EarthView.Maximized = false;
+GMAT EarthView.Add = {feichuan, Earth, Luna, Mars};
+GMAT EarthView.CoordinateSystem = EarthMJ2000Eq;
+GMAT EarthView.DrawObject = [ true true true true ];
+GMAT EarthView.DataCollectFrequency = 1;
+GMAT EarthView.UpdatePlotFrequency = 50;
+GMAT EarthView.NumPointsToRedraw = 0;
+GMAT EarthView.ShowPlot = true;
+GMAT EarthView.MaxPlotPoints = 20000;
+GMAT EarthView.ShowLabels = true;
+GMAT EarthView.ViewPointReference = Earth;
+GMAT EarthView.ViewPointVector = [ 30000 0 0 ];
+GMAT EarthView.ViewDirection = Earth;
+GMAT EarthView.ViewScaleFactor = 1;
+GMAT EarthView.ViewUpCoordinateSystem = EarthMJ2000Eq;
+GMAT EarthView.ViewUpAxis = Z;
+GMAT EarthView.EclipticPlane = Off;
+GMAT EarthView.XYPlane = On;
+GMAT EarthView.WireFrame = Off;
+GMAT EarthView.Axes = On;
+GMAT EarthView.Grid = Off;
+GMAT EarthView.SunLine = Off;
+GMAT EarthView.UseInitialView = On;
+GMAT EarthView.StarCount = 7000;
+GMAT EarthView.EnableStars = Off;
+GMAT EarthView.EnableConstellations = Off;
+
+Create ReportFile ReportFile1;
+GMAT ReportFile1.SolverIterations = Current;
+GMAT ReportFile1.UpperLeft = [ 0.1207729468599034 0.2446300715990453 ];
+GMAT ReportFile1.Size = [ 0.5978260869565217 0.7947494033412887 ];
+GMAT ReportFile1.RelativeZOrder = 502;
+GMAT ReportFile1.Maximized = false;
+GMAT ReportFile1.Filename = 'ReportFile1.txt';
+GMAT ReportFile1.Precision = 16;
+GMAT ReportFile1.WriteHeaders = true;
+GMAT ReportFile1.LeftJustify = On;
+GMAT ReportFile1.ZeroFill = Off;
+GMAT ReportFile1.FixedWidth = true;
+GMAT ReportFile1.Delimiter = ' ';
+GMAT ReportFile1.ColumnWidth = 23;
+GMAT ReportFile1.WriteReport = true;
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create OrbitView SunView;
+GMAT SunView.SolverIterations = Current;
+GMAT SunView.UpperLeft = [ 0.1507537688442211 0.3198090692124105 ];
+GMAT SunView.Size = [ 0.4365577889447236 0.665871121718377 ];
+GMAT SunView.RelativeZOrder = 647;
+GMAT SunView.Maximized = false;
+GMAT SunView.Add = {feichuan, Earth, Mars};
+GMAT SunView.CoordinateSystem = sunxyz;
+GMAT SunView.DrawObject = [ true true true ];
+GMAT SunView.DataCollectFrequency = 1;
+GMAT SunView.UpdatePlotFrequency = 50;
+GMAT SunView.NumPointsToRedraw = 0;
+GMAT SunView.ShowPlot = true;
+GMAT SunView.MaxPlotPoints = 20000;
+GMAT SunView.ShowLabels = true;
+GMAT SunView.ViewPointReference = Sun;
+GMAT SunView.ViewPointVector = [ -113000000 30000 1130000000 ];
+GMAT SunView.ViewDirection = Sun;
+GMAT SunView.ViewScaleFactor = 1;
+GMAT SunView.ViewUpCoordinateSystem = sunxyz;
+GMAT SunView.ViewUpAxis = Z;
+GMAT SunView.EclipticPlane = Off;
+GMAT SunView.XYPlane = On;
+GMAT SunView.WireFrame = Off;
+GMAT SunView.Axes = On;
+GMAT SunView.Grid = Off;
+GMAT SunView.SunLine = Off;
+GMAT SunView.UseInitialView = On;
+GMAT SunView.StarCount = 7000;
+GMAT SunView.EnableStars = Off;
+GMAT SunView.EnableConstellations = Off;
+
+%----------------------------------------
+%---------- Arrays, Variables, Strings
+%----------------------------------------
+Create Variable diedai dv I fashe period;
+GMAT diedai = 130;
+GMAT dv = 0;
+GMAT fashe = 30677;
+GMAT period = 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+
+BeginMissionSequence;
+For 'diedai FlyPeriod' I = 1:1:2;
+   GMAT 'Vary FlyPeriod' period = 190 + I*10;
+   
+   For 'diedai LaunchTime' I = 1:1:3;
+      GMAT 'Vary LaunchTime' fashe = 30680 + I*2;
+      
+      BeginScript 'Apply LaunchTime'
+         GMAT feichuan.Epoch = fashe;
+      EndScript;
+      
+      Optimize 'Optimize deltaV' Yukon1 {SolveMode = Solve, ExitMode = DiscardAndContinue, ShowProgressWindow = true};
+         
+         BeginScript 'Reset LocationState'
+            GMAT feichuan.CoordinateSystem = EarthMJ2000Eq;
+            GMAT feichuan.DisplayStateType = Keplerian;
+            GMAT feichuan.SMA = 7191.938817629029;
+            GMAT feichuan.ECC = 0.02454974900598216;
+            GMAT feichuan.INC = 0;
+            GMAT feichuan.RAAN = 0;
+            GMAT feichuan.AOP = 260.8053537307933;
+            GMAT feichuan.TA = 99.88774933204586;
+         EndScript;
+         Vary 'Vary DSM.v' Yukon1(DSM.Element1 = 1.339190476547329, {Perturbation = 0.0001, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+         Vary 'Vary DSM.n' Yukon1(DSM.Element2 = 0.02179998400866244, {Perturbation = 0.0001, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+         Vary 'Vary DSM.b' Yukon1(DSM.Element3 = -5.656735979288727, {Perturbation = 0.0001, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+         Maneuver 'Apply DSM' DSM(feichuan);
+         Propagate 'Prop FlyPeriod' onlySun(feichuan) {feichuan.ElapsedDays = period};
+         NonlinearConstraint 'Arrive at Mars constraint1' Yukon1(feichuan.marxyz.X=2000);
+         NonlinearConstraint 'Arrive at Mars constraint2' Yukon1(feichuan.marxyz.Y=2000);
+         NonlinearConstraint 'Arrive at Mars constraint3' Yukon1(feichuan.marxyz.Z=0);
+         GMAT 'Compute deltaV' dv = sqrt(DSM.Element1^2 +DSM.Element2^2+ DSM.Element3^2);
+         Minimize 'Minimize dv' Yukon1(dv);
+      EndOptimize;  % For optimizer Yukon1
+      Report 'Write in Report' ReportFile1 fashe dv period;
+   
+   
+   EndFor;
+
+EndFor;
+
+
+
+
+
+
+
