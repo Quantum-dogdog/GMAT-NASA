@@ -1,0 +1,222 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2024-10-01 20:49:03
+
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft change8;
+GMAT change8.DateFormat = A1ModJulian;
+GMAT change8.Epoch = '30712.735';
+GMAT change8.CoordinateSystem = EarthMJ2000Eq;
+GMAT change8.DisplayStateType = Keplerian;
+GMAT change8.SMA = 6580.476999999999;
+GMAT change8.ECC = 0.008799999999999744;
+GMAT change8.INC = 28.44699999999998;
+GMAT change8.RAAN = 0.07959000000370745;
+GMAT change8.AOP = 300.1460000000022;
+GMAT change8.TA = 0.06279000001925271;
+GMAT change8.DryMass = 2000;
+GMAT change8.Cd = 2.2;
+GMAT change8.Cr = 1.8;
+GMAT change8.DragArea = 15;
+GMAT change8.SRPArea = 1;
+GMAT change8.SPADDragScaleFactor = 1;
+GMAT change8.SPADSRPScaleFactor = 1;
+GMAT change8.AtmosDensityScaleFactor = 1;
+GMAT change8.ExtendedMassPropertiesModel = 'None';
+GMAT change8.NAIFId = -10000001;
+GMAT change8.NAIFIdReferenceFrame = -9000001;
+GMAT change8.OrbitColor = Red;
+GMAT change8.TargetColor = Teal;
+GMAT change8.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+GMAT change8.CdSigma = 1e+70;
+GMAT change8.CrSigma = 1e+70;
+GMAT change8.Id = 'SatId';
+GMAT change8.Attitude = CoordinateSystemFixed;
+GMAT change8.SPADSRPInterpolationMethod = Bilinear;
+GMAT change8.SPADSRPScaleFactorSigma = 1e+70;
+GMAT change8.SPADDragInterpolationMethod = Bilinear;
+GMAT change8.SPADDragScaleFactorSigma = 1e+70;
+GMAT change8.AtmosDensityScaleFactorSigma = 1e+70;
+GMAT change8.ModelFile = 'aura.3ds';
+GMAT change8.ModelOffsetX = 0;
+GMAT change8.ModelOffsetY = 0;
+GMAT change8.ModelOffsetZ = 0;
+GMAT change8.ModelRotationX = 0;
+GMAT change8.ModelRotationY = 0;
+GMAT change8.ModelRotationZ = 0;
+GMAT change8.ModelScale = 1;
+GMAT change8.AttitudeDisplayStateType = 'Quaternion';
+GMAT change8.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT change8.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT change8.EulerAngleSequence = '321';
+
+
+
+
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel cr3bp_ForceModel;
+GMAT cr3bp_ForceModel.CentralBody = Earth;
+GMAT cr3bp_ForceModel.PrimaryBodies = {Earth};
+GMAT cr3bp_ForceModel.PointMasses = {Luna, Sun};
+GMAT cr3bp_ForceModel.Drag = None;
+GMAT cr3bp_ForceModel.SRP = On;
+GMAT cr3bp_ForceModel.RelativisticCorrection = Off;
+GMAT cr3bp_ForceModel.ErrorControl = RSSStep;
+GMAT cr3bp_ForceModel.GravityField.Earth.Degree = 4;
+GMAT cr3bp_ForceModel.GravityField.Earth.Order = 4;
+GMAT cr3bp_ForceModel.GravityField.Earth.StmLimit = 100;
+GMAT cr3bp_ForceModel.GravityField.Earth.PotentialFile = 'JGM2.cof';
+GMAT cr3bp_ForceModel.GravityField.Earth.TideModel = 'None';
+GMAT cr3bp_ForceModel.SRP.Flux = 1367;
+GMAT cr3bp_ForceModel.SRP.SRPModel = Spherical;
+GMAT cr3bp_ForceModel.SRP.Nominal_Sun = 149597870.691;
+
+Create ForceModel moonprop_ForceModel;
+GMAT moonprop_ForceModel.CentralBody = Luna;
+GMAT moonprop_ForceModel.PrimaryBodies = {Luna};
+GMAT moonprop_ForceModel.PointMasses = {Earth, Sun};
+GMAT moonprop_ForceModel.Drag = None;
+GMAT moonprop_ForceModel.SRP = On;
+GMAT moonprop_ForceModel.RelativisticCorrection = Off;
+GMAT moonprop_ForceModel.ErrorControl = RSSStep;
+GMAT moonprop_ForceModel.GravityField.Luna.Degree = 4;
+GMAT moonprop_ForceModel.GravityField.Luna.Order = 4;
+GMAT moonprop_ForceModel.GravityField.Luna.StmLimit = 100;
+GMAT moonprop_ForceModel.GravityField.Luna.PotentialFile = 'LP165P.cof';
+GMAT moonprop_ForceModel.GravityField.Luna.TideModel = 'None';
+GMAT moonprop_ForceModel.SRP.Flux = 1367;
+GMAT moonprop_ForceModel.SRP.SRPModel = Spherical;
+GMAT moonprop_ForceModel.SRP.Nominal_Sun = 149597870.691;
+
+%----------------------------------------
+%---------- Propagators
+%----------------------------------------
+
+Create Propagator cr3bp;
+GMAT cr3bp.FM = cr3bp_ForceModel;
+GMAT cr3bp.Type = PrinceDormand78;
+GMAT cr3bp.InitialStepSize = 600;
+GMAT cr3bp.Accuracy = 1e-13;
+GMAT cr3bp.MinStep = 0.001;
+GMAT cr3bp.MaxStep = 86400;
+GMAT cr3bp.MaxStepAttempts = 50;
+GMAT cr3bp.StopIfAccuracyIsViolated = true;
+
+Create Propagator moonprop;
+GMAT moonprop.FM = moonprop_ForceModel;
+GMAT moonprop.Type = PrinceDormand78;
+GMAT moonprop.InitialStepSize = 600;
+GMAT moonprop.Accuracy = 1e-13;
+GMAT moonprop.MinStep = 0.001;
+GMAT moonprop.MaxStep = 86400;
+GMAT moonprop.MaxStepAttempts = 50;
+GMAT moonprop.StopIfAccuracyIsViolated = true;
+
+%----------------------------------------
+%---------- Burns
+%----------------------------------------
+
+Create ImpulsiveBurn ELI;
+GMAT ELI.CoordinateSystem = Local;
+GMAT ELI.Origin = Earth;
+GMAT ELI.Axes = VNB;
+GMAT ELI.Element1 = 0;
+GMAT ELI.Element2 = 0;
+GMAT ELI.Element3 = 0;
+GMAT ELI.DecrementMass = false;
+GMAT ELI.Isp = 300;
+GMAT ELI.GravitationalAccel = 9.81;
+
+%----------------------------------------
+%---------- Coordinate Systems
+%----------------------------------------
+
+Create CoordinateSystem diyue;
+GMAT diyue.Origin = Earth;
+GMAT diyue.Axes = ObjectReferenced;
+GMAT diyue.XAxis = R;
+GMAT diyue.ZAxis = N;
+GMAT diyue.Primary = Earth;
+GMAT diyue.Secondary = Luna;
+
+%----------------------------------------
+%---------- Solvers
+%----------------------------------------
+
+Create VF13ad VF13ad1;
+GMAT VF13ad1.ShowProgress = true;
+GMAT VF13ad1.ReportStyle = Normal;
+GMAT VF13ad1.ReportFile = 'VF13adVF13ad1.data';
+GMAT VF13ad1.MaximumIterations = 200;
+GMAT VF13ad1.Tolerance = 1e-05;
+GMAT VF13ad1.UseCentralDifferences = false;
+GMAT VF13ad1.FeasibilityTolerance = 1;
+
+Create DifferentialCorrector DefaultDC;
+GMAT DefaultDC.ShowProgress = true;
+GMAT DefaultDC.ReportStyle = Normal;
+GMAT DefaultDC.ReportFile = 'DifferentialCorrectorDefaultDC.data';
+GMAT DefaultDC.MaximumIterations = 25;
+GMAT DefaultDC.DerivativeMethod = ForwardDifference;
+GMAT DefaultDC.Algorithm = NewtonRaphson;
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create OrbitView EarthMoonSystemView;
+GMAT EarthMoonSystemView.SolverIterations = Current;
+GMAT EarthMoonSystemView.UpperLeft = [ 0.01470588235294118 0.162004662004662 ];
+GMAT EarthMoonSystemView.Size = [ 0.8388235294117647 0.8065268065268065 ];
+GMAT EarthMoonSystemView.RelativeZOrder = 2434;
+GMAT EarthMoonSystemView.Maximized = false;
+GMAT EarthMoonSystemView.Add = {change8, Earth, Luna};
+GMAT EarthMoonSystemView.CoordinateSystem = EarthMJ2000Eq;
+GMAT EarthMoonSystemView.DrawObject = [ true true true ];
+GMAT EarthMoonSystemView.DataCollectFrequency = 1;
+GMAT EarthMoonSystemView.UpdatePlotFrequency = 50;
+GMAT EarthMoonSystemView.NumPointsToRedraw = 0;
+GMAT EarthMoonSystemView.ShowPlot = true;
+GMAT EarthMoonSystemView.MaxPlotPoints = 20000;
+GMAT EarthMoonSystemView.ShowLabels = true;
+GMAT EarthMoonSystemView.ViewPointReference = Earth;
+GMAT EarthMoonSystemView.ViewPointVector = [ 3000 3000 800000 ];
+GMAT EarthMoonSystemView.ViewDirection = Earth;
+GMAT EarthMoonSystemView.ViewScaleFactor = 1;
+GMAT EarthMoonSystemView.ViewUpCoordinateSystem = EarthMJ2000Eq;
+GMAT EarthMoonSystemView.ViewUpAxis = Z;
+GMAT EarthMoonSystemView.EclipticPlane = Off;
+GMAT EarthMoonSystemView.XYPlane = On;
+GMAT EarthMoonSystemView.WireFrame = Off;
+GMAT EarthMoonSystemView.Axes = On;
+GMAT EarthMoonSystemView.Grid = Off;
+GMAT EarthMoonSystemView.SunLine = Off;
+GMAT EarthMoonSystemView.UseInitialView = On;
+GMAT EarthMoonSystemView.StarCount = 7000;
+GMAT EarthMoonSystemView.EnableStars = Off;
+GMAT EarthMoonSystemView.EnableConstellations = Off;
+
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+
+BeginMissionSequence;
+Optimize VF13ad1 {SolveMode = Solve, ExitMode = SaveAndContinue, ShowProgressWindow = true};
+   Vary VF13ad1(ELI.Element1 = 3.119875903536447, {Perturbation = 0.0001, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver ELI(change8);
+   Propagate cr3bp(change8) {change8.ElapsedDays = 2.5};
+   Propagate moonprop(change8) {change8.Luna.Periapsis};
+   NonlinearConstraint VF13ad1(change8.Luna.RMAG<=13000);
+   Propagate moonprop(change8) {change8.ElapsedDays = 0.5};
+   Propagate cr3bp(change8) {change8.Earth.Periapsis};
+   NonlinearConstraint VF13ad1(change8.Earth.RMAG<=10000);
+   Minimize VF13ad1(ELI.Element1);
+EndOptimize;  % For optimizer VF13ad1
