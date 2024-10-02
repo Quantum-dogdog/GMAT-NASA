@@ -1,0 +1,326 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2024-10-02 18:57:41
+
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft Tianwen5;
+GMAT Tianwen5.DateFormat = UTCGregorian;
+GMAT Tianwen5.Epoch = '01 Jan 2025 11:59:28.000';
+GMAT Tianwen5.CoordinateSystem = RiDi;
+GMAT Tianwen5.DisplayStateType = Cartesian;
+GMAT Tianwen5.X = -6044.860099999998;
+GMAT Tianwen5.Y = -9.291328015130496e-13;
+GMAT Tianwen5.Z = -2563.575799999999;
+GMAT Tianwen5.VX = 0.01789999999999969;
+GMAT Tianwen5.VY = -7.797199999999995;
+GMAT Tianwen5.VZ = -0.01250000000000032;
+GMAT Tianwen5.DryMass = 2000;
+GMAT Tianwen5.Cd = 2.2;
+GMAT Tianwen5.Cr = 1.8;
+GMAT Tianwen5.DragArea = 15;
+GMAT Tianwen5.SRPArea = 1;
+GMAT Tianwen5.SPADDragScaleFactor = 1;
+GMAT Tianwen5.SPADSRPScaleFactor = 1;
+GMAT Tianwen5.AtmosDensityScaleFactor = 1;
+GMAT Tianwen5.ExtendedMassPropertiesModel = 'None';
+GMAT Tianwen5.Tanks = {LOXLH2};
+GMAT Tianwen5.NAIFId = -10000001;
+GMAT Tianwen5.NAIFIdReferenceFrame = -9000001;
+GMAT Tianwen5.OrbitColor = Red;
+GMAT Tianwen5.TargetColor = Teal;
+GMAT Tianwen5.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+GMAT Tianwen5.CdSigma = 1e+70;
+GMAT Tianwen5.CrSigma = 1e+70;
+GMAT Tianwen5.Id = 'SatId';
+GMAT Tianwen5.Attitude = CoordinateSystemFixed;
+GMAT Tianwen5.SPADSRPInterpolationMethod = Bilinear;
+GMAT Tianwen5.SPADSRPScaleFactorSigma = 1e+70;
+GMAT Tianwen5.SPADDragInterpolationMethod = Bilinear;
+GMAT Tianwen5.SPADDragScaleFactorSigma = 1e+70;
+GMAT Tianwen5.AtmosDensityScaleFactorSigma = 1e+70;
+GMAT Tianwen5.ModelFile = 'aura.3ds';
+GMAT Tianwen5.ModelOffsetX = 0;
+GMAT Tianwen5.ModelOffsetY = 0;
+GMAT Tianwen5.ModelOffsetZ = 0;
+GMAT Tianwen5.ModelRotationX = 0;
+GMAT Tianwen5.ModelRotationY = 0;
+GMAT Tianwen5.ModelRotationZ = 0;
+GMAT Tianwen5.ModelScale = 1;
+GMAT Tianwen5.AttitudeDisplayStateType = 'Quaternion';
+GMAT Tianwen5.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT Tianwen5.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT Tianwen5.EulerAngleSequence = '321';
+
+%----------------------------------------
+%---------- Hardware Components
+%----------------------------------------
+
+Create ChemicalTank LOXLH2;
+GMAT LOXLH2.AllowNegativeFuelMass = false;
+GMAT LOXLH2.FuelMass = 6000;
+GMAT LOXLH2.Pressure = 1500;
+GMAT LOXLH2.Temperature = 20;
+GMAT LOXLH2.RefTemperature = 20;
+GMAT LOXLH2.Volume = 10;
+GMAT LOXLH2.FuelDensity = 1260;
+GMAT LOXLH2.PressureModel = PressureRegulated;
+
+
+
+
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel NearEarth_ForceModel;
+GMAT NearEarth_ForceModel.CentralBody = Earth;
+GMAT NearEarth_ForceModel.PrimaryBodies = {Earth};
+GMAT NearEarth_ForceModel.PointMasses = {Sun};
+GMAT NearEarth_ForceModel.Drag = None;
+GMAT NearEarth_ForceModel.SRP = On;
+GMAT NearEarth_ForceModel.RelativisticCorrection = Off;
+GMAT NearEarth_ForceModel.ErrorControl = RSSStep;
+GMAT NearEarth_ForceModel.GravityField.Earth.Degree = 4;
+GMAT NearEarth_ForceModel.GravityField.Earth.Order = 4;
+GMAT NearEarth_ForceModel.GravityField.Earth.StmLimit = 100;
+GMAT NearEarth_ForceModel.GravityField.Earth.PotentialFile = 'JGM2.cof';
+GMAT NearEarth_ForceModel.GravityField.Earth.TideModel = 'None';
+GMAT NearEarth_ForceModel.SRP.Flux = 1367;
+GMAT NearEarth_ForceModel.SRP.SRPModel = Spherical;
+GMAT NearEarth_ForceModel.SRP.Nominal_Sun = 149597870.691;
+
+Create ForceModel TaiYangXi_ForceModel;
+GMAT TaiYangXi_ForceModel.CentralBody = Sun;
+GMAT TaiYangXi_ForceModel.PointMasses = {Earth, Jupiter, Luna, Mars, Mercury, Neptune, Pluto, Saturn, Sun, Uranus, Venus};
+GMAT TaiYangXi_ForceModel.Drag = None;
+GMAT TaiYangXi_ForceModel.SRP = On;
+GMAT TaiYangXi_ForceModel.RelativisticCorrection = Off;
+GMAT TaiYangXi_ForceModel.ErrorControl = RSSStep;
+GMAT TaiYangXi_ForceModel.SRP.Flux = 1367;
+GMAT TaiYangXi_ForceModel.SRP.SRPModel = Spherical;
+GMAT TaiYangXi_ForceModel.SRP.Nominal_Sun = 149597870.691;
+
+%----------------------------------------
+%---------- Propagators
+%----------------------------------------
+
+Create Propagator NearEarth;
+GMAT NearEarth.FM = NearEarth_ForceModel;
+GMAT NearEarth.Type = PrinceDormand78;
+GMAT NearEarth.InitialStepSize = 600;
+GMAT NearEarth.Accuracy = 1e-13;
+GMAT NearEarth.MinStep = 0.001;
+GMAT NearEarth.MaxStep = 86400;
+GMAT NearEarth.MaxStepAttempts = 50;
+GMAT NearEarth.StopIfAccuracyIsViolated = true;
+
+Create Propagator TaiYangXi;
+GMAT TaiYangXi.FM = TaiYangXi_ForceModel;
+GMAT TaiYangXi.Type = PrinceDormand78;
+GMAT TaiYangXi.InitialStepSize = 600;
+GMAT TaiYangXi.Accuracy = 1e-12;
+GMAT TaiYangXi.MinStep = 0.001;
+GMAT TaiYangXi.MaxStep = 86400;
+GMAT TaiYangXi.MaxStepAttempts = 50;
+GMAT TaiYangXi.StopIfAccuracyIsViolated = true;
+
+%----------------------------------------
+%---------- Burns
+%----------------------------------------
+
+Create ImpulsiveBurn ELI;
+GMAT ELI.CoordinateSystem = Local;
+GMAT ELI.Origin = Earth;
+GMAT ELI.Axes = VNB;
+GMAT ELI.Element1 = 4;
+GMAT ELI.Element2 = 0;
+GMAT ELI.Element3 = 0;
+GMAT ELI.DecrementMass = true;
+GMAT ELI.Tank = {LOXLH2};
+GMAT ELI.Isp = 445;
+GMAT ELI.GravitationalAccel = 9.81;
+
+%----------------------------------------
+%---------- Coordinate Systems
+%----------------------------------------
+
+Create CoordinateSystem Solxyz;
+GMAT Solxyz.Origin = Sun;
+GMAT Solxyz.Axes = MJ2000Ec;
+
+Create CoordinateSystem RiDi;
+GMAT RiDi.Origin = Earth;
+GMAT RiDi.Axes = BodySpinSun;
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create OrbitView SolView;
+GMAT SolView.SolverIterations = Current;
+GMAT SolView.UpperLeft = [ 0.001176470588235294 0 ];
+GMAT SolView.Size = [ 0.5564705882352942 0.7776484284051223 ];
+GMAT SolView.RelativeZOrder = 321;
+GMAT SolView.Maximized = false;
+GMAT SolView.Add = {Tianwen5, Earth, Mars, Sun, Venus};
+GMAT SolView.CoordinateSystem = Solxyz;
+GMAT SolView.DrawObject = [ true true true true true ];
+GMAT SolView.DataCollectFrequency = 1;
+GMAT SolView.UpdatePlotFrequency = 50;
+GMAT SolView.NumPointsToRedraw = 0;
+GMAT SolView.ShowPlot = true;
+GMAT SolView.MaxPlotPoints = 60000;
+GMAT SolView.ShowLabels = true;
+GMAT SolView.ViewPointReference = Sun;
+GMAT SolView.ViewPointVector = [ 0 0 450000000 ];
+GMAT SolView.ViewDirection = Sun;
+GMAT SolView.ViewScaleFactor = 1;
+GMAT SolView.ViewUpCoordinateSystem = Solxyz;
+GMAT SolView.ViewUpAxis = Z;
+GMAT SolView.EclipticPlane = Off;
+GMAT SolView.XYPlane = On;
+GMAT SolView.WireFrame = Off;
+GMAT SolView.Axes = On;
+GMAT SolView.Grid = Off;
+GMAT SolView.SunLine = Off;
+GMAT SolView.UseInitialView = On;
+GMAT SolView.StarCount = 7000;
+GMAT SolView.EnableStars = Off;
+GMAT SolView.EnableConstellations = Off;
+
+Create OrbitView RiDiView;
+GMAT RiDiView.SolverIterations = Current;
+GMAT RiDiView.UpperLeft = [ 0.04352941176470588 0.1245634458672875 ];
+GMAT RiDiView.Size = [ 0.6141176470588235 0.7741559953434226 ];
+GMAT RiDiView.RelativeZOrder = 339;
+GMAT RiDiView.Maximized = false;
+GMAT RiDiView.Add = {Tianwen5, Earth, Sun};
+GMAT RiDiView.CoordinateSystem = RiDi;
+GMAT RiDiView.DrawObject = [ true true true ];
+GMAT RiDiView.DataCollectFrequency = 1;
+GMAT RiDiView.UpdatePlotFrequency = 50;
+GMAT RiDiView.NumPointsToRedraw = 0;
+GMAT RiDiView.ShowPlot = true;
+GMAT RiDiView.MaxPlotPoints = 60000;
+GMAT RiDiView.ShowLabels = true;
+GMAT RiDiView.ViewPointReference = Earth;
+GMAT RiDiView.ViewPointVector = [ -40000 0 10000 ];
+GMAT RiDiView.ViewDirection = Earth;
+GMAT RiDiView.ViewScaleFactor = 1;
+GMAT RiDiView.ViewUpCoordinateSystem = RiDi;
+GMAT RiDiView.ViewUpAxis = Z;
+GMAT RiDiView.EclipticPlane = Off;
+GMAT RiDiView.XYPlane = On;
+GMAT RiDiView.WireFrame = Off;
+GMAT RiDiView.Axes = On;
+GMAT RiDiView.Grid = Off;
+GMAT RiDiView.SunLine = Off;
+GMAT RiDiView.UseInitialView = On;
+GMAT RiDiView.StarCount = 7000;
+GMAT RiDiView.EnableStars = Off;
+GMAT RiDiView.EnableConstellations = Off;
+
+Create XYPlot XYPlot1;
+GMAT XYPlot1.SolverIterations = Current;
+GMAT XYPlot1.UpperLeft = [ 0.34 0.3993015133876601 ];
+GMAT XYPlot1.Size = [ 0.6558823529411765 0.4505238649592549 ];
+GMAT XYPlot1.RelativeZOrder = 291;
+GMAT XYPlot1.Maximized = false;
+GMAT XYPlot1.XVariable = diedai;
+GMAT XYPlot1.YVariables = {zhouqi};
+GMAT XYPlot1.ShowGrid = true;
+GMAT XYPlot1.ShowPlot = true;
+
+Create ReportFile ReportFile1;
+GMAT ReportFile1.SolverIterations = Current;
+GMAT ReportFile1.UpperLeft = [ 0 0 ];
+GMAT ReportFile1.Size = [ 0.5982352941176471 0.7962747380675204 ];
+GMAT ReportFile1.RelativeZOrder = 287;
+GMAT ReportFile1.Maximized = false;
+GMAT ReportFile1.Filename = 'ReportFile1.txt';
+GMAT ReportFile1.Precision = 16;
+GMAT ReportFile1.Add = {diedai, zhouqi};
+GMAT ReportFile1.WriteHeaders = true;
+GMAT ReportFile1.LeftJustify = On;
+GMAT ReportFile1.ZeroFill = Off;
+GMAT ReportFile1.FixedWidth = true;
+GMAT ReportFile1.Delimiter = ' ';
+GMAT ReportFile1.ColumnWidth = 23;
+GMAT ReportFile1.WriteReport = true;
+
+Create OrbitView EarthView;
+GMAT EarthView.SolverIterations = Current;
+GMAT EarthView.UpperLeft = [ 0.04 0.03579418344519016 ];
+GMAT EarthView.Size = [ 0.6611764705882353 0.8691275167785235 ];
+GMAT EarthView.RelativeZOrder = 366;
+GMAT EarthView.Maximized = false;
+GMAT EarthView.Add = {Tianwen5, Earth, Sun, Mars, Venus};
+GMAT EarthView.CoordinateSystem = Solxyz;
+GMAT EarthView.DrawObject = [ true true true true true ];
+GMAT EarthView.DataCollectFrequency = 1;
+GMAT EarthView.UpdatePlotFrequency = 50;
+GMAT EarthView.NumPointsToRedraw = 0;
+GMAT EarthView.ShowPlot = true;
+GMAT EarthView.MaxPlotPoints = 60000;
+GMAT EarthView.ShowLabels = true;
+GMAT EarthView.ViewPointReference = Earth;
+GMAT EarthView.ViewPointVector = [ 0 0 3000000 ];
+GMAT EarthView.ViewDirection = Earth;
+GMAT EarthView.ViewScaleFactor = 1;
+GMAT EarthView.ViewUpCoordinateSystem = Solxyz;
+GMAT EarthView.ViewUpAxis = Z;
+GMAT EarthView.EclipticPlane = Off;
+GMAT EarthView.XYPlane = On;
+GMAT EarthView.WireFrame = Off;
+GMAT EarthView.Axes = On;
+GMAT EarthView.Grid = Off;
+GMAT EarthView.SunLine = Off;
+GMAT EarthView.UseInitialView = On;
+GMAT EarthView.StarCount = 7000;
+GMAT EarthView.EnableStars = Off;
+GMAT EarthView.EnableConstellations = Off;
+
+%----------------------------------------
+%---------- Arrays, Variables, Strings
+%----------------------------------------
+Create Variable diedai daotui yuanridian zhouqi;
+GMAT diedai = 0;
+GMAT daotui = 0;
+GMAT yuanridian = 0;
+GMAT zhouqi = 0;
+
+
+
+
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+
+BeginMissionSequence;
+Toggle ReportFile1 RiDiView SolView XYPlot1 Off;
+For diedai = 1:1:20;
+   GMAT daotui = -diedai * 60;
+   Propagate BackProp NearEarth(Tianwen5) {Tianwen5.ElapsedSecs = daotui};
+   Maneuver ELI(Tianwen5);
+   Propagate NearEarth(Tianwen5) {Tianwen5.ElapsedDays = 0.5};
+   Propagate TaiYangXi(Tianwen5) {Tianwen5.Sun.Apoapsis};
+   GMAT yuanridian = Tianwen5.Sun.RMAG;
+   GMAT zhouqi = Tianwen5.Sun.OrbitPeriod / 86400;
+   
+   BeginScript
+      GMAT Tianwen5.Epoch = '01 Jan 2025 11:59:28.000';
+      GMAT Tianwen5.X = -6044.860099999998;
+      GMAT Tianwen5.Y = -2.459275730108679e-13;
+      GMAT Tianwen5.Z = -2563.575799999999;
+      GMAT Tianwen5.VX = 0.01789999999999988;
+      GMAT Tianwen5.VY = -7.797199999999998;
+      GMAT Tianwen5.VZ = -0.01250000000000015;
+      GMAT Tianwen5.LOXLH2.FuelMass = 6000;
+      GMAT Tianwen5.OrbitColor = [200 0 0];
+   EndScript;
+EndFor;
