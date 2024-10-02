@@ -79,3 +79,13 @@ PS:还有更强大的libsnopt Optimizer第三方插件，但是因为snopt是商
 ## 14
 
 新增EarthMoonFreeReturn.script，实现的近月点是13000km（含月球半径），返回时近地点10000km（含地球半径），地月自由返回轨道允许航天器从地球出发到达月球，在近月点无需施加额外推力，即可自动返回地球（8字形，即四个地月转移轨道之一的地球顺形月球逆行轨道）。
+
+## 2024-10-02更新
+
+## 15
+
+![image](https://github.com/Quantum-dogdog/GMAT-NASA/blob/main/periapsis%20's%20location.png)
+
+一张直观、明晰的示意图，清楚的告诉你：如果你想要Vinf与地球公转速度平行时，近地点（即施加deltaV的点）与日地连线的关系。
+
+以及两个分析的脚本文件：fenxi_dianhuoshiji.script & fenxi2_1bi2gongzhenguidao.script
