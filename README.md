@@ -89,3 +89,10 @@ PS:还有更强大的libsnopt Optimizer第三方插件，但是因为snopt是商
 一张直观、明晰的示意图，清楚的告诉你：如果你想要Vinf与地球公转速度平行时，近地点（即施加deltaV的点）与日地连线的关系。
 
 以及两个分析的脚本文件：fenxi_dianhuoshiji.script & fenxi2_1bi2gongzhenguidao.script
+
+
+## 2024-10-28更新
+
+## 16
+
+新增平行世界的EuropaClipper.script,飞行时序、飞掠时间与现实几乎完全一致，主要参考NASA的eyes on the solar system网页可视化工具中的数据进行仿真，MMH/NTO Thruster的官方数据未查到（采用的是[rocketCEA](https://github.com/sonofeft/RocketCEA)里理想1维状态下的最高比冲350s），可惜并不掌握接口抓包的技能（希望搞小猿搜题算法大赛的人中也有航天爱好者，能来抓一下NASA的包），而且eyes on the solar system也不给出深空机动的计划时间，所以只能根据自己喜好选定几个DSM的时刻，导致2750kg的燃料不够用（需要-370kg）。据此，给此次轨道仿真只打81分。
