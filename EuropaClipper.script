@@ -1,0 +1,586 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2024-10-27 21:06:16
+
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft europaclipper;
+GMAT europaclipper.DateFormat = UTCGregorian;
+GMAT europaclipper.Epoch = '14 Oct 2024 16:13:54.000';
+GMAT europaclipper.CoordinateSystem = poinyxyz;
+GMAT europaclipper.DisplayStateType = Cartesian;
+GMAT europaclipper.X = -0;
+GMAT europaclipper.Y = 0;
+GMAT europaclipper.Z = 0;
+GMAT europaclipper.VX = 2.079933447696192e-15;
+GMAT europaclipper.VY = 7.900000000000018;
+GMAT europaclipper.VZ = 7.596354101302438e-15;
+GMAT europaclipper.DryMass = 3240;
+GMAT europaclipper.Cd = 2.2;
+GMAT europaclipper.Cr = 1.8;
+GMAT europaclipper.DragArea = 15;
+GMAT europaclipper.SRPArea = 1;
+GMAT europaclipper.SPADDragScaleFactor = 1;
+GMAT europaclipper.SPADSRPScaleFactor = 1;
+GMAT europaclipper.AtmosDensityScaleFactor = 1;
+GMAT europaclipper.ExtendedMassPropertiesModel = 'None';
+GMAT europaclipper.Tanks = {MMH};
+GMAT europaclipper.Thrusters = {Thruster1};
+GMAT europaclipper.NAIFId = -10000001;
+GMAT europaclipper.NAIFIdReferenceFrame = -9000001;
+GMAT europaclipper.OrbitColor = Red;
+GMAT europaclipper.TargetColor = Teal;
+GMAT europaclipper.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+GMAT europaclipper.CdSigma = 1e+70;
+GMAT europaclipper.CrSigma = 1e+70;
+GMAT europaclipper.Id = 'SatId';
+GMAT europaclipper.Attitude = CoordinateSystemFixed;
+GMAT europaclipper.SPADSRPInterpolationMethod = Bilinear;
+GMAT europaclipper.SPADSRPScaleFactorSigma = 1e+70;
+GMAT europaclipper.SPADDragInterpolationMethod = Bilinear;
+GMAT europaclipper.SPADDragScaleFactorSigma = 1e+70;
+GMAT europaclipper.AtmosDensityScaleFactorSigma = 1e+70;
+GMAT europaclipper.ModelFile = 'aura.3ds';
+GMAT europaclipper.ModelOffsetX = 0;
+GMAT europaclipper.ModelOffsetY = 0;
+GMAT europaclipper.ModelOffsetZ = 0;
+GMAT europaclipper.ModelRotationX = 0;
+GMAT europaclipper.ModelRotationY = 0;
+GMAT europaclipper.ModelRotationZ = 0;
+GMAT europaclipper.ModelScale = 1;
+GMAT europaclipper.AttitudeDisplayStateType = 'Quaternion';
+GMAT europaclipper.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT europaclipper.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT europaclipper.EulerAngleSequence = '321';
+
+%----------------------------------------
+%---------- Hardware Components
+%----------------------------------------
+
+Create ChemicalTank MMH;
+GMAT MMH.AllowNegativeFuelMass = true;
+GMAT MMH.FuelMass = 2750;
+GMAT MMH.Pressure = 1500;
+GMAT MMH.Temperature = 20;
+GMAT MMH.RefTemperature = 20;
+GMAT MMH.Volume = 10;
+GMAT MMH.FuelDensity = 780;
+GMAT MMH.PressureModel = PressureRegulated;
+
+Create ChemicalThruster Thruster1;
+GMAT Thruster1.CoordinateSystem = Local;
+GMAT Thruster1.Origin = Earth;
+GMAT Thruster1.Axes = VNB;
+GMAT Thruster1.ThrustDirection1 = 1;
+GMAT Thruster1.ThrustDirection2 = 0;
+GMAT Thruster1.ThrustDirection3 = 0;
+GMAT Thruster1.DutyCycle = 1;
+GMAT Thruster1.ThrustScaleFactor = 1;
+GMAT Thruster1.DecrementMass = true;
+GMAT Thruster1.Tank = {MMH};
+GMAT Thruster1.MixRatio = [ 1 ];
+GMAT Thruster1.GravitationalAccel = 9.81;
+GMAT Thruster1.C1 = 13000;
+GMAT Thruster1.C2 = 0;
+GMAT Thruster1.C3 = 0;
+GMAT Thruster1.C4 = 0;
+GMAT Thruster1.C5 = 0;
+GMAT Thruster1.C6 = 0;
+GMAT Thruster1.C7 = 0;
+GMAT Thruster1.C8 = 0;
+GMAT Thruster1.C9 = 0;
+GMAT Thruster1.C10 = 0;
+GMAT Thruster1.C11 = 0;
+GMAT Thruster1.C12 = 0;
+GMAT Thruster1.C13 = 0;
+GMAT Thruster1.C14 = 0;
+GMAT Thruster1.C15 = 0;
+GMAT Thruster1.C16 = 0;
+GMAT Thruster1.K1 = 316;
+GMAT Thruster1.K2 = 0;
+GMAT Thruster1.K3 = 0;
+GMAT Thruster1.K4 = 0;
+GMAT Thruster1.K5 = 0;
+GMAT Thruster1.K6 = 0;
+GMAT Thruster1.K7 = 0;
+GMAT Thruster1.K8 = 0;
+GMAT Thruster1.K9 = 0;
+GMAT Thruster1.K10 = 0;
+GMAT Thruster1.K11 = 0;
+GMAT Thruster1.K12 = 0;
+GMAT Thruster1.K13 = 0;
+GMAT Thruster1.K14 = 0;
+GMAT Thruster1.K15 = 0;
+GMAT Thruster1.K16 = 0;
+
+%----------------------------------------
+%---------- GroundStations
+%----------------------------------------
+
+Create GroundStation Guess1;
+GMAT Guess1.OrbitColor = Thistle;
+GMAT Guess1.TargetColor = DarkGray;
+GMAT Guess1.CentralBody = Earth;
+GMAT Guess1.StateType = Spherical;
+GMAT Guess1.HorizonReference = Sphere;
+GMAT Guess1.Location1 = 22;
+GMAT Guess1.Location2 = 300;
+GMAT Guess1.Location3 = 171.9;
+GMAT Guess1.Id = 'StationId';
+GMAT Guess1.IonosphereModel = 'None';
+GMAT Guess1.TroposphereModel = 'None';
+GMAT Guess1.DataSource = 'Constant';
+GMAT Guess1.Temperature = 295.1;
+GMAT Guess1.Pressure = 1013.5;
+GMAT Guess1.Humidity = 55;
+GMAT Guess1.MinimumElevationAngle = 7;
+
+
+
+
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel NearEarth_ForceModel;
+GMAT NearEarth_ForceModel.CentralBody = Earth;
+GMAT NearEarth_ForceModel.PrimaryBodies = {Earth};
+GMAT NearEarth_ForceModel.PointMasses = {Luna, Sun};
+GMAT NearEarth_ForceModel.Drag = None;
+GMAT NearEarth_ForceModel.SRP = Off;
+GMAT NearEarth_ForceModel.RelativisticCorrection = Off;
+GMAT NearEarth_ForceModel.ErrorControl = RSSStep;
+GMAT NearEarth_ForceModel.GravityField.Earth.Degree = 4;
+GMAT NearEarth_ForceModel.GravityField.Earth.Order = 4;
+GMAT NearEarth_ForceModel.GravityField.Earth.StmLimit = 100;
+GMAT NearEarth_ForceModel.GravityField.Earth.PotentialFile = 'JGM2.cof';
+GMAT NearEarth_ForceModel.GravityField.Earth.TideModel = 'None';
+
+Create ForceModel NearMars_ForceModel;
+GMAT NearMars_ForceModel.CentralBody = Mars;
+GMAT NearMars_ForceModel.PrimaryBodies = {Mars};
+GMAT NearMars_ForceModel.PointMasses = {Sun};
+GMAT NearMars_ForceModel.Drag = None;
+GMAT NearMars_ForceModel.SRP = Off;
+GMAT NearMars_ForceModel.RelativisticCorrection = Off;
+GMAT NearMars_ForceModel.ErrorControl = RSSStep;
+GMAT NearMars_ForceModel.GravityField.Mars.Degree = 4;
+GMAT NearMars_ForceModel.GravityField.Mars.Order = 4;
+GMAT NearMars_ForceModel.GravityField.Mars.StmLimit = 100;
+GMAT NearMars_ForceModel.GravityField.Mars.PotentialFile = 'Mars50c.cof';
+GMAT NearMars_ForceModel.GravityField.Mars.TideModel = 'None';
+
+Create ForceModel NearJupiter_ForceModel;
+GMAT NearJupiter_ForceModel.CentralBody = Jupiter;
+GMAT NearJupiter_ForceModel.PointMasses = {Jupiter, Sun};
+GMAT NearJupiter_ForceModel.Drag = None;
+GMAT NearJupiter_ForceModel.SRP = Off;
+GMAT NearJupiter_ForceModel.RelativisticCorrection = Off;
+GMAT NearJupiter_ForceModel.ErrorControl = RSSStep;
+
+Create ForceModel Sol_ForceModel;
+GMAT Sol_ForceModel.CentralBody = Sun;
+GMAT Sol_ForceModel.PointMasses = {Earth, Jupiter, Mars, Mercury, Neptune, Pluto, Saturn, Sun, Uranus, Venus};
+GMAT Sol_ForceModel.Drag = None;
+GMAT Sol_ForceModel.SRP = Off;
+GMAT Sol_ForceModel.RelativisticCorrection = Off;
+GMAT Sol_ForceModel.ErrorControl = RSSStep;
+
+%----------------------------------------
+%---------- Propagators
+%----------------------------------------
+
+Create Propagator NearEarth;
+GMAT NearEarth.FM = NearEarth_ForceModel;
+GMAT NearEarth.Type = PrinceDormand78;
+GMAT NearEarth.InitialStepSize = 600;
+GMAT NearEarth.Accuracy = 1e-13;
+GMAT NearEarth.MinStep = 0;
+GMAT NearEarth.MaxStep = 86400;
+GMAT NearEarth.MaxStepAttempts = 50;
+GMAT NearEarth.StopIfAccuracyIsViolated = true;
+
+Create Propagator NearMars;
+GMAT NearMars.FM = NearMars_ForceModel;
+GMAT NearMars.Type = PrinceDormand78;
+GMAT NearMars.InitialStepSize = 600;
+GMAT NearMars.Accuracy = 1e-12;
+GMAT NearMars.MinStep = 0;
+GMAT NearMars.MaxStep = 86400;
+GMAT NearMars.MaxStepAttempts = 50;
+GMAT NearMars.StopIfAccuracyIsViolated = true;
+
+Create Propagator NearJupiter;
+GMAT NearJupiter.FM = NearJupiter_ForceModel;
+GMAT NearJupiter.Type = PrinceDormand78;
+GMAT NearJupiter.InitialStepSize = 600;
+GMAT NearJupiter.Accuracy = 1e-13;
+GMAT NearJupiter.MinStep = 0;
+GMAT NearJupiter.MaxStep = 86400;
+GMAT NearJupiter.MaxStepAttempts = 50;
+GMAT NearJupiter.StopIfAccuracyIsViolated = true;
+
+Create Propagator Sol;
+GMAT Sol.FM = Sol_ForceModel;
+GMAT Sol.Type = PrinceDormand78;
+GMAT Sol.InitialStepSize = 600;
+GMAT Sol.Accuracy = 1e-13;
+GMAT Sol.MinStep = 0;
+GMAT Sol.MaxStep = 86400;
+GMAT Sol.MaxStepAttempts = 50;
+GMAT Sol.StopIfAccuracyIsViolated = true;
+
+%----------------------------------------
+%---------- Burns
+%----------------------------------------
+
+Create ImpulsiveBurn ELI;
+GMAT ELI.CoordinateSystem = Local;
+GMAT ELI.Origin = Earth;
+GMAT ELI.Axes = VNB;
+GMAT ELI.Element1 = 0;
+GMAT ELI.Element2 = 0;
+GMAT ELI.Element3 = 0;
+GMAT ELI.DecrementMass = false;
+GMAT ELI.Isp = 300;
+GMAT ELI.GravitationalAccel = 9.81;
+
+Create ImpulsiveBurn DSM2;
+GMAT DSM2.CoordinateSystem = sunxyz;
+GMAT DSM2.Element1 = 0;
+GMAT DSM2.Element2 = 0;
+GMAT DSM2.Element3 = 0;
+GMAT DSM2.DecrementMass = true;
+GMAT DSM2.Tank = {MMH};
+GMAT DSM2.Isp = 350;
+GMAT DSM2.GravitationalAccel = 9.81;
+
+Create ImpulsiveBurn DSM3;
+GMAT DSM3.CoordinateSystem = Local;
+GMAT DSM3.Origin = Earth;
+GMAT DSM3.Axes = VNB;
+GMAT DSM3.Element1 = 0;
+GMAT DSM3.Element2 = 0;
+GMAT DSM3.Element3 = 0;
+GMAT DSM3.DecrementMass = true;
+GMAT DSM3.Tank = {MMH};
+GMAT DSM3.Isp = 350;
+GMAT DSM3.GravitationalAccel = 9.81;
+
+Create ImpulsiveBurn DSM4;
+GMAT DSM4.CoordinateSystem = sunxyz;
+GMAT DSM4.Element1 = 0;
+GMAT DSM4.Element2 = 0;
+GMAT DSM4.Element3 = 0;
+GMAT DSM4.DecrementMass = true;
+GMAT DSM4.Tank = {MMH};
+GMAT DSM4.Isp = 350;
+GMAT DSM4.GravitationalAccel = 9.81;
+
+Create ImpulsiveBurn JOI;
+GMAT JOI.CoordinateSystem = Local;
+GMAT JOI.Origin = Jupiter;
+GMAT JOI.Axes = VNB;
+GMAT JOI.Element1 = -1.35;
+GMAT JOI.Element2 = 0;
+GMAT JOI.Element3 = 0;
+GMAT JOI.DecrementMass = true;
+GMAT JOI.Tank = {MMH};
+GMAT JOI.Isp = 350;
+GMAT JOI.GravitationalAccel = 9.81;
+
+Create ImpulsiveBurn JOI2;
+GMAT JOI2.CoordinateSystem = Local;
+GMAT JOI2.Origin = Jupiter;
+GMAT JOI2.Axes = VNB;
+GMAT JOI2.Element1 = -0.34;
+GMAT JOI2.Element2 = 0;
+GMAT JOI2.Element3 = 0;
+GMAT JOI2.DecrementMass = true;
+GMAT JOI2.Tank = {MMH};
+GMAT JOI2.Isp = 350;
+GMAT JOI2.GravitationalAccel = 9.81;
+
+%----------------------------------------
+%---------- Coordinate Systems
+%----------------------------------------
+
+Create CoordinateSystem poinyxyz;
+GMAT poinyxyz.Origin = Guess1;
+GMAT poinyxyz.Axes = Topocentric;
+
+Create CoordinateSystem sunxyz;
+GMAT sunxyz.Origin = Sun;
+GMAT sunxyz.Axes = MJ2000Ec;
+
+Create CoordinateSystem Maarsxyz;
+GMAT Maarsxyz.Origin = Mars;
+GMAT Maarsxyz.Axes = BodyInertial;
+
+Create CoordinateSystem MarsFixed;
+GMAT MarsFixed.Origin = Mars;
+GMAT MarsFixed.Axes = BodyFixed;
+
+Create CoordinateSystem Juxyz;
+GMAT Juxyz.Origin = Jupiter;
+GMAT Juxyz.Axes = BodyInertial;
+
+Create CoordinateSystem JupiterFixed;
+GMAT JupiterFixed.Origin = Jupiter;
+GMAT JupiterFixed.Axes = BodyFixed;
+
+%----------------------------------------
+%---------- Solvers
+%----------------------------------------
+
+Create DifferentialCorrector DefaultDC;
+GMAT DefaultDC.ShowProgress = true;
+GMAT DefaultDC.ReportStyle = Normal;
+GMAT DefaultDC.ReportFile = 'DifferentialCorrectorDefaultDC.data';
+GMAT DefaultDC.MaximumIterations = 50;
+GMAT DefaultDC.DerivativeMethod = ForwardDifference;
+GMAT DefaultDC.Algorithm = NewtonRaphson;
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create OrbitView EarthView;
+GMAT EarthView.SolverIterations = Current;
+GMAT EarthView.UpperLeft = [ 0.1929411764705882 0.156019656019656 ];
+GMAT EarthView.Size = [ 0.5417647058823529 0.7506142506142506 ];
+GMAT EarthView.RelativeZOrder = 15;
+GMAT EarthView.Maximized = false;
+GMAT EarthView.Add = {europaclipper, Earth};
+GMAT EarthView.CoordinateSystem = EarthMJ2000Eq;
+GMAT EarthView.DrawObject = [ true true ];
+GMAT EarthView.DataCollectFrequency = 1;
+GMAT EarthView.UpdatePlotFrequency = 50;
+GMAT EarthView.NumPointsToRedraw = 0;
+GMAT EarthView.ShowPlot = true;
+GMAT EarthView.MaxPlotPoints = 20000;
+GMAT EarthView.ShowLabels = true;
+GMAT EarthView.ViewPointReference = Earth;
+GMAT EarthView.ViewPointVector = [ 30000 0 0 ];
+GMAT EarthView.ViewDirection = Earth;
+GMAT EarthView.ViewScaleFactor = 1;
+GMAT EarthView.ViewUpCoordinateSystem = EarthMJ2000Eq;
+GMAT EarthView.ViewUpAxis = Z;
+GMAT EarthView.EclipticPlane = Off;
+GMAT EarthView.XYPlane = On;
+GMAT EarthView.WireFrame = Off;
+GMAT EarthView.Axes = On;
+GMAT EarthView.Grid = Off;
+GMAT EarthView.SunLine = Off;
+GMAT EarthView.UseInitialView = On;
+GMAT EarthView.StarCount = 7000;
+GMAT EarthView.EnableStars = Off;
+GMAT EarthView.EnableConstellations = Off;
+
+Create GroundTrackPlot DefaultGroundTrackPlot;
+GMAT DefaultGroundTrackPlot.SolverIterations = Current;
+GMAT DefaultGroundTrackPlot.UpperLeft = [ 0 0.6203931203931204 ];
+GMAT DefaultGroundTrackPlot.Size = [ 0.2435294117647059 0.2788697788697789 ];
+GMAT DefaultGroundTrackPlot.RelativeZOrder = 5;
+GMAT DefaultGroundTrackPlot.Maximized = false;
+GMAT DefaultGroundTrackPlot.Add = {europaclipper};
+GMAT DefaultGroundTrackPlot.DataCollectFrequency = 1;
+GMAT DefaultGroundTrackPlot.UpdatePlotFrequency = 50;
+GMAT DefaultGroundTrackPlot.NumPointsToRedraw = 0;
+GMAT DefaultGroundTrackPlot.ShowPlot = true;
+GMAT DefaultGroundTrackPlot.MaxPlotPoints = 20000;
+GMAT DefaultGroundTrackPlot.CentralBody = Earth;
+GMAT DefaultGroundTrackPlot.TextureMap = 'ModifiedBlueMarble.jpg';
+
+Create ReportFile ReportFile1;
+GMAT ReportFile1.SolverIterations = Current;
+GMAT ReportFile1.UpperLeft = [ 0.06823316764572977 0.1354344122657581 ];
+GMAT ReportFile1.Size = [ 0.5991866244916403 0.7981260647359455 ];
+GMAT ReportFile1.RelativeZOrder = 634;
+GMAT ReportFile1.Maximized = false;
+GMAT ReportFile1.Filename = 'ReportFile1.txt';
+GMAT ReportFile1.Precision = 16;
+GMAT ReportFile1.Add = {europaclipper.A1Gregorian, europaclipper.Earth.Altitude};
+GMAT ReportFile1.WriteHeaders = true;
+GMAT ReportFile1.LeftJustify = On;
+GMAT ReportFile1.ZeroFill = Off;
+GMAT ReportFile1.FixedWidth = true;
+GMAT ReportFile1.Delimiter = ' ';
+GMAT ReportFile1.ColumnWidth = 23;
+GMAT ReportFile1.WriteReport = true;
+
+Create OrbitView SolView;
+GMAT SolView.SolverIterations = Current;
+GMAT SolView.UpperLeft = [ 0.32 0.04914004914004914 ];
+GMAT SolView.Size = [ 0.6258823529411764 0.9017199017199017 ];
+GMAT SolView.RelativeZOrder = 80;
+GMAT SolView.Maximized = false;
+GMAT SolView.Add = {europaclipper, Earth, Mars, Jupiter, Sun};
+GMAT SolView.CoordinateSystem = sunxyz;
+GMAT SolView.DrawObject = [ true true true true true ];
+GMAT SolView.DataCollectFrequency = 1;
+GMAT SolView.UpdatePlotFrequency = 50;
+GMAT SolView.NumPointsToRedraw = 0;
+GMAT SolView.ShowPlot = true;
+GMAT SolView.MaxPlotPoints = 20000;
+GMAT SolView.ShowLabels = true;
+GMAT SolView.ViewPointReference = Sun;
+GMAT SolView.ViewPointVector = [ 0 0 1900000000 ];
+GMAT SolView.ViewDirection = Sun;
+GMAT SolView.ViewScaleFactor = 1;
+GMAT SolView.ViewUpCoordinateSystem = sunxyz;
+GMAT SolView.ViewUpAxis = Z;
+GMAT SolView.EclipticPlane = Off;
+GMAT SolView.XYPlane = On;
+GMAT SolView.WireFrame = Off;
+GMAT SolView.Axes = On;
+GMAT SolView.Grid = Off;
+GMAT SolView.SunLine = Off;
+GMAT SolView.UseInitialView = On;
+GMAT SolView.StarCount = 7000;
+GMAT SolView.EnableStars = Off;
+GMAT SolView.EnableConstellations = Off;
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create OrbitView MarsView;
+GMAT MarsView.SolverIterations = Current;
+GMAT MarsView.UpperLeft = [ 0.1229411764705882 -0.006142506142506142 ];
+GMAT MarsView.Size = [ 0.6711764705882353 0.9054054054054054 ];
+GMAT MarsView.RelativeZOrder = 10;
+GMAT MarsView.Maximized = false;
+GMAT MarsView.Add = {europaclipper, Earth, Sun, Mars};
+GMAT MarsView.CoordinateSystem = Maarsxyz;
+GMAT MarsView.DrawObject = [ true true true true ];
+GMAT MarsView.DataCollectFrequency = 1;
+GMAT MarsView.UpdatePlotFrequency = 50;
+GMAT MarsView.NumPointsToRedraw = 0;
+GMAT MarsView.ShowPlot = true;
+GMAT MarsView.MaxPlotPoints = 20000;
+GMAT MarsView.ShowLabels = true;
+GMAT MarsView.ViewPointReference = Mars;
+GMAT MarsView.ViewPointVector = [ 30000 0 30000 ];
+GMAT MarsView.ViewDirection = Mars;
+GMAT MarsView.ViewScaleFactor = 1;
+GMAT MarsView.ViewUpCoordinateSystem = Maarsxyz;
+GMAT MarsView.ViewUpAxis = Z;
+GMAT MarsView.EclipticPlane = Off;
+GMAT MarsView.XYPlane = On;
+GMAT MarsView.WireFrame = Off;
+GMAT MarsView.Axes = On;
+GMAT MarsView.Grid = Off;
+GMAT MarsView.SunLine = Off;
+GMAT MarsView.UseInitialView = On;
+GMAT MarsView.StarCount = 7000;
+GMAT MarsView.EnableStars = Off;
+GMAT MarsView.EnableConstellations = Off;
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create OrbitView JuView;
+GMAT JuView.SolverIterations = Current;
+GMAT JuView.UpperLeft = [ 0.2370588235294118 0.06019656019656019 ];
+GMAT JuView.Size = [ 0.5417647058823529 0.7506142506142506 ];
+GMAT JuView.RelativeZOrder = 72;
+GMAT JuView.Maximized = false;
+GMAT JuView.Add = {europaclipper, Jupiter, Sun};
+GMAT JuView.CoordinateSystem = Juxyz;
+GMAT JuView.DrawObject = [ true true true ];
+GMAT JuView.DataCollectFrequency = 1;
+GMAT JuView.UpdatePlotFrequency = 50;
+GMAT JuView.NumPointsToRedraw = 0;
+GMAT JuView.ShowPlot = true;
+GMAT JuView.MaxPlotPoints = 20000;
+GMAT JuView.ShowLabels = true;
+GMAT JuView.ViewPointReference = Jupiter;
+GMAT JuView.ViewPointVector = [ 1900000 0 1900000 ];
+GMAT JuView.ViewDirection = Jupiter;
+GMAT JuView.ViewScaleFactor = 1;
+GMAT JuView.ViewUpCoordinateSystem = Juxyz;
+GMAT JuView.ViewUpAxis = Z;
+GMAT JuView.EclipticPlane = Off;
+GMAT JuView.XYPlane = On;
+GMAT JuView.WireFrame = Off;
+GMAT JuView.Axes = On;
+GMAT JuView.Grid = Off;
+GMAT JuView.SunLine = Off;
+GMAT JuView.UseInitialView = On;
+GMAT JuView.StarCount = 7000;
+GMAT JuView.EnableStars = Off;
+GMAT JuView.EnableConstellations = Off;
+
+%----------------------------------------
+%---------- Arrays, Variables, Strings
+%----------------------------------------
+Create Variable burntime;
+GMAT burntime = 0;
+
+
+
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+
+BeginMissionSequence;
+Target DefaultDC {SolveMode = RunInitialGuess, ExitMode = SaveAndContinue, ShowProgressWindow = false};
+   Vary DefaultDC(europaclipper.VX = 3.16446385372728, {Perturbation = 0.0001, Lower = -10, Upper = 10, MaxStep = 0.02, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary DefaultDC(europaclipper.VY = 6.68103801003792, {Perturbation = 0.0001, Lower = 6, Upper = 9, MaxStep = 0.02, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary DefaultDC(europaclipper.VZ = 0.09828330890992795, {Perturbation = 0.0001, Lower = 0, Upper = 10, MaxStep = 0.02, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Propagate NearEarth(europaclipper) {europaclipper.ElapsedSecs = 2412};
+   Achieve DefaultDC(europaclipper.EarthMJ2000Eq.INC = 32.19, {Tolerance = 0.1});
+   Achieve DefaultDC(europaclipper.Earth.Altitude = 172.8, {Tolerance = 0.1});
+EndTarget;  % For targeter DefaultDC
+Target DefaultDC {SolveMode = RunInitialGuess, ExitMode = SaveAndContinue, ShowProgressWindow = false};
+   Vary DefaultDC(ELI.Element1 = 4.946674942567125, {Perturbation = 0.0001, Lower = -10, Upper = 10, MaxStep = 0.02, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver ELI(europaclipper);
+   Propagate NearEarth(europaclipper) {europaclipper.ElapsedSecs = 1};
+   Achieve DefaultDC(europaclipper.Earth.C3Energy = 40.68, {Tolerance = 0.01});
+EndTarget;  % For targeter DefaultDC
+Propagate 'Propto202410170822UTC' NearEarth(europaclipper) {europaclipper.TAIModJulian = 30600.84903935185};
+Target DefaultDC {SolveMode = RunInitialGuess, ExitMode = SaveAndContinue, ShowProgressWindow = false};
+   Vary DefaultDC(DSM2.Element1 = -0.004032497206292052, {Perturbation = 0.0001, Lower = -10, Upper = 10, MaxStep = 0.1, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary DefaultDC(DSM2.Element2 = 0.003842046327631226, {Perturbation = 0.0001, Lower = -10, Upper = 10, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary DefaultDC(DSM2.Element3 = 0.1701489518386409, {Perturbation = 0.0001, Lower = -10, Upper = 10, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver DSM2(europaclipper);
+   Propagate Sol(europaclipper) {europaclipper.TAIModJulian = 30710.00042824074};
+   Propagate NearMars(europaclipper) {europaclipper.Mars.Periapsis};
+   Achieve DefaultDC(europaclipper.Maarsxyz.BdotR = 3200, {Tolerance = 0.1});
+   Achieve DefaultDC(europaclipper.Maarsxyz.BdotT = -3450.0, {Tolerance = 0.1});
+EndTarget;  % For targeter DefaultDC
+Propagate NearMars(europaclipper) {europaclipper.ElapsedDays = 10};
+Propagate Sol(europaclipper) {europaclipper.Sun.Apoapsis};
+Target DefaultDC {SolveMode = RunInitialGuess, ExitMode = SaveAndContinue, ShowProgressWindow = false};
+   Vary DefaultDC(DSM3.Element1 = -0.2212593826824929, {Perturbation = 0.0001, Lower = -10, Upper = 10, MaxStep = 0.1, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary DefaultDC(DSM3.Element2 = -0.02617892392699206, {Perturbation = 0.0001, Lower = -10, Upper = 10, MaxStep = 0.1, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary DefaultDC(DSM3.Element3 = -0.1617909660017697, {Perturbation = 0.0001, Lower = -10, Upper = 10, MaxStep = 0.1, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver DSM3(europaclipper);
+   Propagate Sol(europaclipper) {europaclipper.TAIModJulian = 31370.84311342592};
+   Propagate NearEarth(europaclipper) {europaclipper.Earth.Periapsis};
+   Achieve DefaultDC(europaclipper.EarthMJ2000Eq.BdotR = 4100, {Tolerance = 0.1});
+   Achieve DefaultDC(europaclipper.EarthMJ2000Eq.BdotT = 10010, {Tolerance = 0.1});
+EndTarget;  % For targeter DefaultDC
+Propagate NearEarth(europaclipper) {europaclipper.ElapsedDays = 5};
+Propagate Sol(europaclipper) {europaclipper.ElapsedDays = 60};
+Target DefaultDC {SolveMode = RunInitialGuess, ExitMode = SaveAndContinue, ShowProgressWindow = false};
+   Vary DefaultDC(DSM4.Element1 = -0.02169541053942439, {Perturbation = 0.0001, Lower = -10, Upper = 10, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary DefaultDC(DSM4.Element2 = -0.05485863104181336, {Perturbation = 0.0001, Lower = -10, Upper = 10, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary DefaultDC(DSM4.Element3 = -0.386876548682267, {Perturbation = 0.0001, Lower = -10, Upper = 10, MaxStep = 0.2, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver DSM4(europaclipper);
+   Propagate Sol(europaclipper) {europaclipper.TAIModJulian = 32587.08684027778, OrbitColor = [0 255 255]};
+   Propagate NearJupiter(europaclipper) {europaclipper.Jupiter.Periapsis};
+   Achieve DefaultDC(europaclipper.Jupiter.Altitude = 730000, {Tolerance = 0.1});
+EndTarget;  % For targeter DefaultDC
+Maneuver JOI(europaclipper);
+Propagate NearJupiter(europaclipper) {europaclipper.ElapsedDays = 100};
+Propagate NearJupiter(europaclipper) {europaclipper.Jupiter.Apoapsis};
+Propagate NearJupiter(europaclipper) {europaclipper.Jupiter.Periapsis};
+Maneuver JOI2(europaclipper);
+Propagate NearJupiter(europaclipper) {europaclipper.Jupiter.Apoapsis};
