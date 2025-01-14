@@ -1,0 +1,316 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2025-01-14 19:08:30
+
+
+%----------------------------------------
+%---------- User-Defined Celestial Bodies
+%----------------------------------------
+
+Create Moon Io;
+GMAT Io.NAIFId = 501;
+GMAT Io.SpiceFrameId = 'IAU_IO';
+GMAT Io.OrbitSpiceKernelName = {'D:\bsp\jup365.bsp'};
+GMAT Io.OrbitColor = [255 128 128];
+GMAT Io.TargetColor = DarkGray;
+GMAT Io.EquatorialRadius = 1821.49;
+GMAT Io.Flattening = 0.00135;
+GMAT Io.Mu = 5959.91547;
+GMAT Io.PosVelSource = 'SPICE';
+GMAT Io.CentralBody = 'Jupiter';
+GMAT Io.RotationDataSource = 'IAUSimplified';
+GMAT Io.OrientationEpoch = 21545;
+GMAT Io.SpinAxisRAConstant = 268.05;
+GMAT Io.SpinAxisRARate = -0.008999999999999999;
+GMAT Io.SpinAxisDECConstant = 64.5;
+GMAT Io.SpinAxisDECRate = 0.003;
+GMAT Io.RotationConstant = 200.39;
+GMAT Io.RotationRate = 203.4889538;
+GMAT Io.TextureMapFileName = 'GenericCelestialBody.jpg';
+GMAT Io.3DModelFile = '';
+GMAT Io.3DModelOffsetX = 0;
+GMAT Io.3DModelOffsetY = 0;
+GMAT Io.3DModelOffsetZ = 0;
+GMAT Io.3DModelRotationX = 0;
+GMAT Io.3DModelRotationY = 0;
+GMAT Io.3DModelRotationZ = 0;
+GMAT Io.3DModelScale = 10;
+
+Create Moon Europa;
+GMAT Europa.NAIFId = 502;
+GMAT Europa.SpiceFrameId = 'IAU_EUROPA';
+GMAT Europa.OrbitSpiceKernelName = {'D:\bsp\jup365.bsp'};
+GMAT Europa.OrbitColor = [255 255 128];
+GMAT Europa.TargetColor = DarkGray;
+GMAT Europa.EquatorialRadius = 1560.8;
+GMAT Europa.Flattening = 0.00181;
+GMAT Europa.Mu = 3202.7121;
+GMAT Europa.PosVelSource = 'SPICE';
+GMAT Europa.CentralBody = 'Jupiter';
+GMAT Europa.RotationDataSource = 'IAUSimplified';
+GMAT Europa.OrientationEpoch = 21545;
+GMAT Europa.SpinAxisRAConstant = 268.08;
+GMAT Europa.SpinAxisRARate = -0.008999999999999999;
+GMAT Europa.SpinAxisDECConstant = 64.51000000000001;
+GMAT Europa.SpinAxisDECRate = 0.003;
+GMAT Europa.RotationConstant = 36.022;
+GMAT Europa.RotationRate = 101.3747235;
+GMAT Europa.TextureMapFileName = 'C:\Users\AAA\Downloads\Europa.jpg';
+GMAT Europa.3DModelFile = '';
+GMAT Europa.3DModelOffsetX = 0;
+GMAT Europa.3DModelOffsetY = 0;
+GMAT Europa.3DModelOffsetZ = 0;
+GMAT Europa.3DModelRotationX = 0;
+GMAT Europa.3DModelRotationY = 0;
+GMAT Europa.3DModelRotationZ = 0;
+GMAT Europa.3DModelScale = 1000;
+
+Create Moon Ganymede;
+GMAT Ganymede.NAIFId = 503;
+GMAT Ganymede.SpiceFrameId = 'IAU_GANYMEDE';
+GMAT Ganymede.OrbitSpiceKernelName = {'D:\bsp\jup365.bsp'};
+GMAT Ganymede.OrbitColor = [128 255 128];
+GMAT Ganymede.TargetColor = DarkGray;
+GMAT Ganymede.EquatorialRadius = 2631.2;
+GMAT Ganymede.Flattening = 0.00247;
+GMAT Ganymede.Mu = 9887.83275;
+GMAT Ganymede.PosVelSource = 'SPICE';
+GMAT Ganymede.CentralBody = 'Jupiter';
+GMAT Ganymede.RotationDataSource = 'IAUSimplified';
+GMAT Ganymede.OrientationEpoch = 21545;
+GMAT Ganymede.SpinAxisRAConstant = 268.2;
+GMAT Ganymede.SpinAxisRARate = -0.008999999999999999;
+GMAT Ganymede.SpinAxisDECConstant = 64.56999999999999;
+GMAT Ganymede.SpinAxisDECRate = 0.003;
+GMAT Ganymede.RotationConstant = 44.064;
+GMAT Ganymede.RotationRate = 50.3176081;
+GMAT Ganymede.TextureMapFileName = 'GenericCelestialBody.jpg';
+GMAT Ganymede.3DModelFile = '';
+GMAT Ganymede.3DModelOffsetX = 0;
+GMAT Ganymede.3DModelOffsetY = 0;
+GMAT Ganymede.3DModelOffsetZ = 0;
+GMAT Ganymede.3DModelRotationX = 0;
+GMAT Ganymede.3DModelRotationY = 0;
+GMAT Ganymede.3DModelRotationZ = 0;
+GMAT Ganymede.3DModelScale = 10;
+
+Create Moon Callisto;
+GMAT Callisto.NAIFId = 504;
+GMAT Callisto.SpiceFrameId = 'IAU_CALLISTO';
+GMAT Callisto.OrbitSpiceKernelName = {'D:\bsp\jup365.bsp'};
+GMAT Callisto.OrbitColor = [128 255 255];
+GMAT Callisto.TargetColor = DarkGray;
+GMAT Callisto.EquatorialRadius = 2410.3;
+GMAT Callisto.Flattening = 0.00324;
+GMAT Callisto.Mu = 7179.2834;
+GMAT Callisto.PosVelSource = 'SPICE';
+GMAT Callisto.CentralBody = 'Jupiter';
+GMAT Callisto.RotationDataSource = 'IAUSimplified';
+GMAT Callisto.OrientationEpoch = 21545;
+GMAT Callisto.SpinAxisRAConstant = 268.72;
+GMAT Callisto.SpinAxisRARate = -0.008999999999999999;
+GMAT Callisto.SpinAxisDECConstant = 64.83;
+GMAT Callisto.SpinAxisDECRate = 0.003;
+GMAT Callisto.RotationConstant = 259.51;
+GMAT Callisto.RotationRate = 21.5710715;
+GMAT Callisto.TextureMapFileName = 'GenericCelestialBody.jpg';
+GMAT Callisto.3DModelFile = '';
+GMAT Callisto.3DModelOffsetX = 0;
+GMAT Callisto.3DModelOffsetY = 0;
+GMAT Callisto.3DModelOffsetZ = 0;
+GMAT Callisto.3DModelRotationX = 0;
+GMAT Callisto.3DModelRotationY = 0;
+GMAT Callisto.3DModelRotationZ = 0;
+GMAT Callisto.3DModelScale = 10;
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft Tianwen4;
+GMAT Tianwen4.DateFormat = UTCGregorian;
+GMAT Tianwen4.Epoch = '01 Jan 2025 11:59:28.000';
+GMAT Tianwen4.CoordinateSystem = jupXYZ;
+GMAT Tianwen4.DisplayStateType = Cartesian;
+GMAT Tianwen4.X = 720000;
+GMAT Tianwen4.Y = 0;
+GMAT Tianwen4.Z = 0;
+GMAT Tianwen4.VX = 0;
+GMAT Tianwen4.VY = 10;
+GMAT Tianwen4.VZ = 4.440892098500626e-16;
+GMAT Tianwen4.DryMass = 850;
+GMAT Tianwen4.Cd = 2.2;
+GMAT Tianwen4.Cr = 1.8;
+GMAT Tianwen4.DragArea = 15;
+GMAT Tianwen4.SRPArea = 1;
+GMAT Tianwen4.SPADDragScaleFactor = 1;
+GMAT Tianwen4.SPADSRPScaleFactor = 1;
+GMAT Tianwen4.AtmosDensityScaleFactor = 1;
+GMAT Tianwen4.ExtendedMassPropertiesModel = 'None';
+GMAT Tianwen4.NAIFId = -10000001;
+GMAT Tianwen4.NAIFIdReferenceFrame = -9000001;
+GMAT Tianwen4.OrbitColor = Red;
+GMAT Tianwen4.TargetColor = Teal;
+GMAT Tianwen4.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+GMAT Tianwen4.CdSigma = 1e+70;
+GMAT Tianwen4.CrSigma = 1e+70;
+GMAT Tianwen4.Id = 'SatId';
+GMAT Tianwen4.Attitude = CoordinateSystemFixed;
+GMAT Tianwen4.SPADSRPInterpolationMethod = Bilinear;
+GMAT Tianwen4.SPADSRPScaleFactorSigma = 1e+70;
+GMAT Tianwen4.SPADDragInterpolationMethod = Bilinear;
+GMAT Tianwen4.SPADDragScaleFactorSigma = 1e+70;
+GMAT Tianwen4.AtmosDensityScaleFactorSigma = 1e+70;
+GMAT Tianwen4.ModelFile = 'aura.3ds';
+GMAT Tianwen4.ModelOffsetX = 0;
+GMAT Tianwen4.ModelOffsetY = 0;
+GMAT Tianwen4.ModelOffsetZ = 0;
+GMAT Tianwen4.ModelRotationX = 0;
+GMAT Tianwen4.ModelRotationY = 0;
+GMAT Tianwen4.ModelRotationZ = 0;
+GMAT Tianwen4.ModelScale = 1;
+GMAT Tianwen4.AttitudeDisplayStateType = 'Quaternion';
+GMAT Tianwen4.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT Tianwen4.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT Tianwen4.EulerAngleSequence = '321';
+
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel DefaultProp_ForceModel;
+GMAT DefaultProp_ForceModel.CentralBody = Jupiter;
+GMAT DefaultProp_ForceModel.PointMasses = {Callisto, Europa, Ganymede, Io, Jupiter};
+GMAT DefaultProp_ForceModel.Drag = None;
+GMAT DefaultProp_ForceModel.SRP = Off;
+GMAT DefaultProp_ForceModel.RelativisticCorrection = Off;
+GMAT DefaultProp_ForceModel.ErrorControl = RSSStep;
+
+%----------------------------------------
+%---------- Propagators
+%----------------------------------------
+
+Create Propagator DefaultProp;
+GMAT DefaultProp.FM = DefaultProp_ForceModel;
+GMAT DefaultProp.Type = PrinceDormand78;
+GMAT DefaultProp.InitialStepSize = 600;
+GMAT DefaultProp.Accuracy = 1e-13;
+GMAT DefaultProp.MinStep = 0;
+GMAT DefaultProp.MaxStep = 86400;
+GMAT DefaultProp.MaxStepAttempts = 50;
+GMAT DefaultProp.StopIfAccuracyIsViolated = true;
+
+%----------------------------------------
+%---------- Burns
+%----------------------------------------
+
+Create ImpulsiveBurn DefaultIB;
+GMAT DefaultIB.CoordinateSystem = Local;
+GMAT DefaultIB.Origin = Earth;
+GMAT DefaultIB.Axes = VNB;
+GMAT DefaultIB.Element1 = 0;
+GMAT DefaultIB.Element2 = 0;
+GMAT DefaultIB.Element3 = 0;
+GMAT DefaultIB.DecrementMass = false;
+GMAT DefaultIB.Isp = 300;
+GMAT DefaultIB.GravitationalAccel = 9.81;
+
+%----------------------------------------
+%---------- Coordinate Systems
+%----------------------------------------
+
+Create CoordinateSystem jupXYZ;
+GMAT jupXYZ.Origin = Jupiter;
+GMAT jupXYZ.Axes = MJ2000Ec;
+
+Create CoordinateSystem EuropaXYZ;
+GMAT EuropaXYZ.Origin = Europa;
+GMAT EuropaXYZ.Axes = MJ2000Ec;
+
+%----------------------------------------
+%---------- Solvers
+%----------------------------------------
+
+Create DifferentialCorrector DefaultDC;
+GMAT DefaultDC.ShowProgress = true;
+GMAT DefaultDC.ReportStyle = Normal;
+GMAT DefaultDC.ReportFile = 'DifferentialCorrectorDefaultDC.data';
+GMAT DefaultDC.MaximumIterations = 25;
+GMAT DefaultDC.DerivativeMethod = ForwardDifference;
+GMAT DefaultDC.Algorithm = NewtonRaphson;
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create OrbitView JupiterView;
+GMAT JupiterView.SolverIterations = Current;
+GMAT JupiterView.UpperLeft = [ 0.002941176470588235 0 ];
+GMAT JupiterView.Size = [ 0.6905882352941176 0.9585308056872038 ];
+GMAT JupiterView.RelativeZOrder = 324;
+GMAT JupiterView.Maximized = false;
+GMAT JupiterView.Add = {Tianwen4, Jupiter, Callisto, Europa, Ganymede, Io};
+GMAT JupiterView.CoordinateSystem = jupXYZ;
+GMAT JupiterView.DrawObject = [ true true true true true true ];
+GMAT JupiterView.DataCollectFrequency = 1;
+GMAT JupiterView.UpdatePlotFrequency = 50;
+GMAT JupiterView.NumPointsToRedraw = 0;
+GMAT JupiterView.ShowPlot = true;
+GMAT JupiterView.MaxPlotPoints = 200000;
+GMAT JupiterView.ShowLabels = true;
+GMAT JupiterView.ViewPointReference = Jupiter;
+GMAT JupiterView.ViewPointVector = [ 0 0 7200000 ];
+GMAT JupiterView.ViewDirection = Jupiter;
+GMAT JupiterView.ViewScaleFactor = 1;
+GMAT JupiterView.ViewUpCoordinateSystem = jupXYZ;
+GMAT JupiterView.ViewUpAxis = Z;
+GMAT JupiterView.EclipticPlane = Off;
+GMAT JupiterView.XYPlane = On;
+GMAT JupiterView.WireFrame = Off;
+GMAT JupiterView.Axes = On;
+GMAT JupiterView.Grid = Off;
+GMAT JupiterView.SunLine = Off;
+GMAT JupiterView.UseInitialView = On;
+GMAT JupiterView.StarCount = 7000;
+GMAT JupiterView.EnableStars = Off;
+GMAT JupiterView.EnableConstellations = Off;
+
+Create OrbitView EuropaView;
+GMAT EuropaView.SolverIterations = Current;
+GMAT EuropaView.UpperLeft = [ 0.002352941176470588 0 ];
+GMAT EuropaView.Size = [ 0.6905882352941176 0.9585308056872038 ];
+GMAT EuropaView.RelativeZOrder = 444;
+GMAT EuropaView.Maximized = false;
+GMAT EuropaView.Add = {Tianwen4, Jupiter, Callisto, Europa, Ganymede, Io};
+GMAT EuropaView.CoordinateSystem = EuropaXYZ;
+GMAT EuropaView.DrawObject = [ true true true true true true ];
+GMAT EuropaView.DataCollectFrequency = 1;
+GMAT EuropaView.UpdatePlotFrequency = 50;
+GMAT EuropaView.NumPointsToRedraw = 0;
+GMAT EuropaView.ShowPlot = true;
+GMAT EuropaView.MaxPlotPoints = 200000;
+GMAT EuropaView.ShowLabels = true;
+GMAT EuropaView.ViewPointReference = Europa;
+GMAT EuropaView.ViewPointVector = [ 0 0 7200 ];
+GMAT EuropaView.ViewDirection = Europa;
+GMAT EuropaView.ViewScaleFactor = 1;
+GMAT EuropaView.ViewUpCoordinateSystem = EuropaXYZ;
+GMAT EuropaView.ViewUpAxis = Z;
+GMAT EuropaView.EclipticPlane = Off;
+GMAT EuropaView.XYPlane = On;
+GMAT EuropaView.WireFrame = Off;
+GMAT EuropaView.Axes = On;
+GMAT EuropaView.Grid = Off;
+GMAT EuropaView.SunLine = Off;
+GMAT EuropaView.UseInitialView = On;
+GMAT EuropaView.StarCount = 7000;
+GMAT EuropaView.EnableStars = Off;
+GMAT EuropaView.EnableConstellations = Off;
+
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+
+BeginMissionSequence;
+Propagate DefaultProp(Tianwen4) {Tianwen4.ElapsedDays = 14};
