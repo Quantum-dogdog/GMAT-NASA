@@ -96,3 +96,9 @@ PS:还有更强大的libsnopt Optimizer第三方插件，但是因为snopt是商
 ## 16
 
 新增平行世界的EuropaClipper.script,飞行时序、飞掠时间与现实几乎完全一致，主要参考NASA的eyes on the solar system网页可视化工具中的数据进行仿真，MMH/NTO Thruster的官方数据未查到（采用的是[rocketCEA](https://github.com/sonofeft/RocketCEA)里理想1维状态下的最高比冲350s），可惜并不掌握接口抓包的技能（希望搞小猿搜题算法大赛的人中也有航天爱好者，能来抓一下NASA的包），而且eyes on the solar system也不给出深空机动的计划时间，所以只能根据自己喜好选定几个DSM的时刻，导致2750kg的燃料不够用（需要-370kg）。据此，给此次轨道仿真只打81分。
+
+## 2025-01-14更新
+
+## 17
+
+新增jupiter system.script,教给大家怎么导入SPICE kernel来添加木星系的4大卫星（指Io、Europa、Ganymede、Callisto），学会了可以推广到添加土星卫星。首先你需要在naif.jpl.nasa.gov上获取jup280.bsp或者jup344.bsp或者jup365.bsp（其实de421.bsp、de430.bsp、de440.bsp和他们有对应的版本关系，但是不知为何在GMAT2022a中de421搭配jup365并不报错,在GMAT2018a中就会报错），网站上不去可以到spiftp.esac.esa.int或者data.darts.isas.jaxa.jp，esa和jaxa做的镜像。然后你需要下载卫星的global map来做贴图（如果你想直接用3d模型的话，需要在3dsmax2009中把网上的资源转换成.3ds格式才能在GMAT中显示），我在这里配套传了Io.jpg和Europa.jpg。卫星的参数的设置需要看ssd.jpl.nasa.gov/sats/phys_par以及Report of the IAU Working Group on cartographic coordinates and rotational elements: 2009这篇论文（为什么用IAU2009是因为jup365与它协调，教程里添加土卫六泰坦的数据来自IAU2006，然后这个数据说是每3年更新1次，但是好像因为IAU2015精度搞得很高，这几年都没有更新的）。
